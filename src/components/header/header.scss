@@ -9,26 +9,30 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 
-  .menu-element {
-    cursor: pointer;
+  a {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: #eac4b3;
+    }
   }
 
-  .element-1 {
+  .menu-element {
+    cursor: pointer;
+
+    &:hover {
+      color: #eac4b3;
+    }
   }
-  .element-2 {
-  }
-  .element-3 {
-  }
+
   .element-4 {
     grid-column: 4 / span 2;
     font-size: 30px;
     font-family: "Original Surfer", sans-serif;
   }
-  .element-5 {
-  }
-  .element-6 {
-  }
-  .element-7 {
+
+  .cart {
     margin: 0 auto;
     .border {
       width: 30px;
@@ -36,6 +40,10 @@
       border-radius: 50%;
       text-align: center;
       border: 2px solid white;
+
+      &:hover {
+        border: 2px solid #eac4b3;
+      }
     }
   }
 }
