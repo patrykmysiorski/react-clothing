@@ -1,0 +1,37 @@
+.main-page {
+  display: grid;
+  align-items: center;
+  height: calc(100vh - 80px);
+  justify-content: center;
+  text-align: center;
+
+  p {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 100;
+  }
+
+  h1 {
+    font-size: 120px;
+    font-weight: 300;
+    margin-top: 40px;
+    letter-spacing: -5px;
+  }
+
+  button {
+    margin-top: 40px;
+    padding: 15px 30px;
+    cursor: pointer;
+    border: 1px solid #eac4b3;
+    border-radius: 2px;
+    background-color: white;
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 3px;
+
+    &:hover {
+      color: #eac4b3;
+    }
+  }
+}
