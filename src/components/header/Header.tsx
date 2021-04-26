@@ -7,6 +7,7 @@ import Brand from "../brand/Brand";
 import MainPage from "../mainPage/MainPage";
 import Contact from "../contact/Contact";
 import Help from "../help/Help";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 interface OwnProps {}
 
@@ -15,8 +16,16 @@ type Props = OwnProps;
 const Header: FunctionComponent<Props> = () => {
   return (
     <BrowserRouter>
+      <Sidebar />
       <div className={"header"}>
-        <span className="menu-element material-icons">menu</span>
+        <span
+          onClick={() =>
+            document.getElementById("sidebar")?.classList.toggle("active")
+          }
+          className="menu-element material-icons"
+        >
+          menu
+        </span>
         <Link to="/shop">{texts.header.shop}</Link>
         <Link to="/brand">{texts.header.brand}</Link>
         <Link to="/" className={"element-4"}>
