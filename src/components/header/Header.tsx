@@ -2,22 +2,18 @@ import React, { FunctionComponent } from "react";
 import "./header.scss";
 import { texts } from "../../texts";
 import { Link } from "react-router-dom";
+import useMenu from "../../hooks/useMenu";
 
-interface OwnProps {
-  setIsOpen: (isOpen: boolean) => void;
-  isOpen: boolean;
-}
+const Header: FunctionComponent = () => {
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
-type Props = OwnProps;
-
-const Header: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
   return (
     <div className={"header"}>
       <span
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="menu-element material-icons"
       >
-        {isOpen ? "close" : "menu"}
+        {isMenuOpen ? "close" : "menu"}
       </span>
       <Link to="/shop">{texts.header.shop}</Link>
       <Link to="/brand">{texts.header.brand}</Link>

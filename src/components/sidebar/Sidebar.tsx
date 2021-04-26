@@ -1,15 +1,11 @@
 import React, {FunctionComponent} from "react";
 import "./sidebar.scss";
+import useMenu from "../../hooks/useMenu";
 
-interface OwnProps {
-  isOpen: boolean;
-}
-
-type Props = OwnProps;
-
-const Sidebar: FunctionComponent<Props> = ({ isOpen }) => {
+const Sidebar: FunctionComponent = () => {
+  const { isMenuOpen } = useMenu();
   return (
-    <div className={`sidebar ${isOpen ? "active" : ""}`}>
+    <div className={`sidebar ${isMenuOpen ? "active" : ""}`}>
       <ul>
         <li>Home</li>
         <li>About</li>
