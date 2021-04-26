@@ -1,60 +1,35 @@
 import React, { FunctionComponent } from "react";
 import "./header.scss";
 import { texts } from "../../texts";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
-import Shop from "../shop/Shop";
-import Brand from "../brand/Brand";
-import MainPage from "../mainPage/MainPage";
-import Contact from "../contact/Contact";
-import Help from "../help/Help";
-import Sidebar from "../../components/sidebar/Sidebar";
+import { Link } from "react-router-dom";
 
-interface OwnProps {}
+interface OwnProps {
+  setIsOpen: (isOpen: boolean) => void;
+  isOpen: boolean;
+}
 
 type Props = OwnProps;
 
-const Header: FunctionComponent<Props> = () => {
+const Header: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
   return (
-    <BrowserRouter>
-      <Sidebar />
-      <div className={"header"}>
-        <span
-          onClick={() =>
-            document.getElementById("sidebar")?.classList.toggle("active")
-          }
-          className="menu-element material-icons"
-        >
-          menu
-        </span>
-        <Link to="/shop">{texts.header.shop}</Link>
-        <Link to="/brand">{texts.header.brand}</Link>
-        <Link to="/" className={"element-4"}>
-          {texts.header.logo}
-        </Link>
-        <Link to="/contact">{texts.header.contact}</Link>
-        <Link to="help">{texts.header.help}</Link>
-        <div className="menu-element cart">
-          <div className="border">7</div>
-        </div>
+    <div className={"header"}>
+      <span
+        onClick={() => setIsOpen(!isOpen)}
+        className="menu-element material-icons"
+      >
+        {isOpen ? "close" : "menu"}
+      </span>
+      <Link to="/shop">{texts.header.shop}</Link>
+      <Link to="/brand">{texts.header.brand}</Link>
+      <Link to="/" className={"element-4"}>
+        {texts.header.logo}
+      </Link>
+      <Link to="/contact">{texts.header.contact}</Link>
+      <Link to="help">{texts.header.help}</Link>
+      <div className="menu-element cart">
+        <div className="border">7</div>
       </div>
-      <Switch>
-        <Route path="/shop">
-          <Shop />
-        </Route>
-        <Route path="/brand">
-          <Brand />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/help">
-          <Help />
-        </Route>
-        <Route path="/">
-          <MainPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    </div>
   );
 };
 
