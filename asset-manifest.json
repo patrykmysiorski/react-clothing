@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/react-clothing/static/css/main.72a35a87.chunk.css",
+    "main.js": "/react-clothing/static/js/main.bd978f87.chunk.js",
+    "main.js.map": "/react-clothing/static/js/main.bd978f87.chunk.js.map",
+    "runtime-main.js": "/react-clothing/static/js/runtime-main.0b6761c3.js",
+    "runtime-main.js.map": "/react-clothing/static/js/runtime-main.0b6761c3.js.map",
+    "static/js/2.db276630.chunk.js": "/react-clothing/static/js/2.db276630.chunk.js",
+    "static/js/2.db276630.chunk.js.map": "/react-clothing/static/js/2.db276630.chunk.js.map",
+    "static/js/3.3e70ce05.chunk.js": "/react-clothing/static/js/3.3e70ce05.chunk.js",
+    "static/js/3.3e70ce05.chunk.js.map": "/react-clothing/static/js/3.3e70ce05.chunk.js.map",
+    "index.html": "/react-clothing/index.html",
+    "static/css/main.72a35a87.chunk.css.map": "/react-clothing/static/css/main.72a35a87.chunk.css.map",
+    "static/js/2.db276630.chunk.js.LICENSE.txt": "/react-clothing/static/js/2.db276630.chunk.js.LICENSE.txt",
+    "static/media/app.scss": "/react-clothing/static/media/main.6454de51.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0b6761c3.js",
+    "static/js/2.db276630.chunk.js",
+    "static/css/main.72a35a87.chunk.css",
+    "static/js/main.bd978f87.chunk.js"
+  ]
+}
