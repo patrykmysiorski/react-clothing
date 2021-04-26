@@ -1,11 +1,13 @@
-import React, { FunctionComponent } from "react";
+import React, {FunctionComponent} from "react";
 import "./header.scss";
-import { texts } from "../../texts";
-import { Link } from "react-router-dom";
+import {texts} from "../../texts";
+import {Link} from "react-router-dom";
 import useMenu from "../../hooks/useMenu";
+import useCart from "../../hooks/useCart";
 
 const Header: FunctionComponent = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
+  const { isCartOpen, setIsCartOpen } = useCart();
 
   return (
     <div className={"header"}>
@@ -22,7 +24,10 @@ const Header: FunctionComponent = () => {
       </Link>
       <Link to="/contact">{texts.header.contact}</Link>
       <Link to="help">{texts.header.help}</Link>
-      <div className="menu-element cart">
+      <div
+        className="menu-element cart-icon"
+        onClick={() => setIsCartOpen(!isCartOpen)}
+      >
         <div className="border">7</div>
       </div>
     </div>

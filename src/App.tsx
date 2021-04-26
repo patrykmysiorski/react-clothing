@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Header from "./components/header/Header";
 import "./app.scss";
-import { Route, Switch } from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Shop from "./components/shop/Shop";
 import Brand from "./components/brand/Brand";
 import Contact from "./components/contact/Contact";
@@ -9,14 +9,21 @@ import Help from "./components/help/Help";
 import MainPage from "./components/mainPage/MainPage";
 import Sidebar from "./components/sidebar/Sidebar";
 import MenuContext from "./contexts/MenuContext";
+import CartContext from "./contexts/CartContext";
+import Cart from "./components/cart/Cart";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const hideMenu = () => {
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const hideSidebars = () => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
+    if (isCartOpen) {
+      setIsCartOpen(false);
+    }
   };
+
   return (
     <>
       <div className="app">
@@ -26,30 +33,40 @@ const App = () => {
             setIsMenuOpen,
           }}
         >
-          <Sidebar />
-          <div
-            onClick={hideMenu}
-            className={`main-content ${isMenuOpen ? "sidebar-menu-open" : ""}`}
+          <CartContext.Provider
+            value={{
+              isCartOpen,
+              setIsCartOpen,
+            }}
           >
-            <Header />
-            <Switch>
-              <Route path="/shop">
-                <Shop />
-              </Route>
-              <Route path="/brand">
-                <Brand />
-              </Route>
-              <Route path="/contact">
-                <Contact />
-              </Route>
-              <Route path="/help">
-                <Help />
-              </Route>
-              <Route path="/">
-                <MainPage />
-              </Route>
-            </Switch>
-          </div>
+            <Sidebar />
+            <Cart />
+            <div
+              onClick={hideSidebars}
+              className={`main-content ${
+                isMenuOpen ? "sidebar-menu-open" : ""
+              } ${isCartOpen ? "cart-open" : ""}`}
+            >
+              <Header />
+              <Switch>
+                <Route path="/shop">
+                  <Shop />
+                </Route>
+                <Route path="/brand">
+                  <Brand />
+                </Route>
+                <Route path="/contact">
+                  <Contact />
+                </Route>
+                <Route path="/help">
+                  <Help />
+                </Route>
+                <Route path="/">
+                  <MainPage />
+                </Route>
+              </Switch>
+            </div>
+          </CartContext.Provider>
         </MenuContext.Provider>
       </div>
     </>
