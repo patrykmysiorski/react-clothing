@@ -1,7 +1,7 @@
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import "./header.scss";
-import {texts} from "../../texts";
-import {Link, useLocation} from "react-router-dom";
+import { texts } from "../../texts";
+import { Link, useLocation } from "react-router-dom";
 import useMenu from "../../hooks/useMenu";
 import useCart from "../../hooks/useCart";
 

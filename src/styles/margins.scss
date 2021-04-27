@@ -1,0 +1,9 @@
+$dirs: "", "-top", "-bottom", "-left", "-right";
+
+@for $i from 1 through 5 {
+  @each $name in $dirs {
+    .m#{$name}-#{$i} {
+      margin#{$name}: ($i * 10px);
+    }
+  }
+}

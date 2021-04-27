@@ -1,0 +1,25 @@
+.sub-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+
+  .sub-list--item:first-child {
+    margin-top: 20px;
+  }
+
+  &--item {
+    padding: 20px;
+
+    &:hover {
+      color: #eac4b3;
+    }
+  }
+}
+
+.shop-sub-menu-active {
+  max-height: 300px;
+}
+
+.help-sub-menu-active {
+  max-height: 300px;
+}
