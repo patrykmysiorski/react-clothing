@@ -1,6 +1,7 @@
-import React, {FunctionComponent} from "react";
-import {texts} from "../../../texts";
+import React, { FunctionComponent } from "react";
+import { texts } from "../../../texts";
 import "./submenu.scss";
+import { Link } from "react-router-dom";
 
 interface OwnProps {
   isMenuOpen: boolean;
@@ -17,7 +18,9 @@ const Submenu: FunctionComponent<Props> = ({ isMenuOpen, menuItem }) => {
     >
       {values.map((value) => (
         <div className="sub-list--item">
-          {texts.menuSidebar[menuItem].links[value]}
+          <Link to={`/${value}`}>
+            {texts.menuSidebar[menuItem].links[value]}
+          </Link>
         </div>
       ))}
     </div>

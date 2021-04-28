@@ -1,4 +1,5 @@
 import React, {FunctionComponent} from "react";
+import "./expandIcon.scss";
 
 interface OwnProps {
   isOpen: boolean;
@@ -9,7 +10,10 @@ type Props = OwnProps;
 
 const ExpandIcon: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
   return (
-    <span className="material-icons" onClick={() => setIsOpen(!isOpen)}>
+    <span
+      className="expand-icon material-icons"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       {isOpen ? "remove" : "add"}
     </span>
   );
