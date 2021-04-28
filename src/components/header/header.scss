@@ -32,7 +32,7 @@
     font-family: "Original Surfer", sans-serif;
   }
 
-  .cart {
+  .cart-icon {
     margin: 0 auto;
     .border {
       width: 30px;
@@ -45,5 +45,13 @@
         border: 2px solid #eac4b3;
       }
     }
+  }
+}
+
+.black-font {
+  color: black;
+
+  a {
+    color: black;
   }
 }

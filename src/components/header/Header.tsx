@@ -1,51 +1,38 @@
 import React, { FunctionComponent } from "react";
 import "./header.scss";
 import { texts } from "../../texts";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
-import Shop from "../shop/Shop";
-import Brand from "../brand/Brand";
-import MainPage from "../mainPage/MainPage";
-import Contact from "../contact/Contact";
-import Help from "../help/Help";
+import { Link, useLocation } from "react-router-dom";
+import useMenu from "../../hooks/useMenu";
+import useCart from "../../hooks/useCart";
 
-interface OwnProps {}
+const Header: FunctionComponent = () => {
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
+  const { isCartOpen, setIsCartOpen } = useCart();
+  const location = useLocation();
+  console.log(location);
 
-type Props = OwnProps;
-
-const Header: FunctionComponent<Props> = () => {
   return (
-    <BrowserRouter>
-      <div className={"header"}>
-        <span className="menu-element material-icons">menu</span>
-        <Link to="/shop">{texts.header.shop}</Link>
-        <Link to="/brand">{texts.header.brand}</Link>
-        <Link to="/" className={"element-4"}>
-          {texts.header.logo}
-        </Link>
-        <Link to="/contact">{texts.header.contact}</Link>
-        <Link to="help">{texts.header.help}</Link>
-        <div className="menu-element cart">
-          <div className="border">7</div>
-        </div>
+    <div className={`header ${location?.pathname !== "/" ? "black-font" : ""}`}>
+      <span
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="menu-element material-icons"
+      >
+        {isMenuOpen ? "close" : "menu"}
+      </span>
+      <Link to="/shop">{texts.header.shop}</Link>
+      <Link to="/brand">{texts.header.brand}</Link>
+      <Link to="/" className={"element-4"}>
+        {texts.header.logo}
+      </Link>
+      <Link to="/contact">{texts.header.contact}</Link>
+      <Link to="help">{texts.header.help}</Link>
+      <div
+        className="menu-element cart-icon"
+        onClick={() => setIsCartOpen(!isCartOpen)}
+      >
+        <div className="border">7</div>
       </div>
-      <Switch>
-        <Route path="/shop">
-          <Shop />
-        </Route>
-        <Route path="/brand">
-          <Brand />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/help">
-          <Help />
-        </Route>
-        <Route path="/">
-          <MainPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    </div>
   );
 };
 
