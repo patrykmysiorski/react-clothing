@@ -9,7 +9,6 @@ const Header: FunctionComponent = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
   const { isCartOpen, setIsCartOpen } = useCart();
   const location = useLocation();
-  console.log(location);
 
   return (
     <div className={`header ${location?.pathname !== "/" ? "black-font" : ""}`}>

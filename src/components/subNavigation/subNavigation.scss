@@ -1,0 +1,18 @@
+.sub-navigation {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(5, 0.1fr);
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  margin-top: 40px;
+
+  a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      color: #eac4b3;
+    }
+  }
+}
