@@ -1,10 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import "./shop.scss";
 import SubPageContainer from "../subPageContainer/SubPageContainer";
 import SubNavigation from "../subNavigation/SubNavigation";
 import { texts } from "../../texts";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { elo } from "../../redux/shop/shopReducer";
+import { decrement, elo, increment } from "../../redux/shop/shopReducer";
+import axios from "axios";
+import store from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { $CombinedState } from "redux";
 
 interface OwnProps {}
 
@@ -14,11 +18,33 @@ const Shop: FunctionComponent<Props> = (props) => {
   const values: string[] = Object.values(texts.menuSidebar.shop.links);
   const dispatch = useAppDispatch();
   const shopStore = useAppSelector((state) => state.shop?.value);
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    axios.get("/test").then((response) => setData(response.data));
+  }, []);
+  console.log("data", data);
 
-  console.log(shopStore);
+  // @ts-ignore
+  const Counter = ({ value, onIncrement, onDecrement, onIncrementAsync }) => (
+    <div>
+      <button onClick={onIncrementAsync}>Increment after 1 second</button>{" "}
+      <button onClick={onIncrement}>Increment</button>{" "}
+      <button onClick={onDecrement}>Decrement</button>
+      <hr />
+      <div>Clicked: {value} times</div>
+    </div>
+  );
+  console.log(store.getState());
+  const dispatchWithoutType = useDispatch();
   return (
     <SubPageContainer>
       <div className="shop">
+        <Counter
+          value={store.getState()["shop"].value.number}
+          onIncrement={() => dispatchWithoutType("INCREMENT")}
+          onDecrement={() => dispatch(decrement)}
+          onIncrementAsync={() => dispatchWithoutType("INCREMENT_ASYNC")}
+        />
         <button onClick={() => dispatch(elo(8))}>elo</button>
         <SubNavigation items={values} />
         <div className="row--1">
