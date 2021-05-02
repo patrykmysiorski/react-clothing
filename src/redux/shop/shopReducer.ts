@@ -1,40 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { jacketsMock } from "../../mocks/jackets";
-import { Product } from "../../models/product";
-import { RootState } from "../store";
+import { Collections } from "models/collections";
+import { RootState } from "redux/store";
 
 interface ShopState {
-  value: {
-    jackets: Product[];
-    number: number;
-  };
+  collections: Collections;
+  isFetching: boolean;
+  isFailed: boolean;
 }
 
 const initialState: ShopState = {
-  value: {
-    jackets: jacketsMock,
-    number: 0,
-  },
+  collections: {},
+  isFetching: false,
+  isFailed: false,
 };
 
 export const shopSlice = createSlice({
   name: "shop",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value.number += 1;
+    fetchCollectionsSuccess: (state, action: PayloadAction<Collections>) => {
+      state.isFetching = false;
+      state.collections = action.payload;
     },
-    decrement: (state) => {
-      state.value.number -= 1;
+    asyncFetchCollectionsStart: (state) => {
+      state.isFetching = true;
     },
-    elo: (state, action: PayloadAction<number>) => {
-      state.value.number += action.payload;
+    fetchCollectionsFailed: (state) => {
+      state.isFetching = false;
+      state.isFailed = true;
     },
   },
 });
 
-export const { increment, decrement, elo } = shopSlice.actions;
+export const {
+  fetchCollectionsSuccess,
+  asyncFetchCollectionsStart,
+  fetchCollectionsFailed,
+} = shopSlice.actions;
 
-export const selectCount = (state: RootState) => state.shop.value;
+export const selectShop = (state: RootState) => state.shop;
 
 export default shopSlice.reducer;

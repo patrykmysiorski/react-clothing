@@ -1,6 +1,6 @@
 import {Product} from "../../src/models/product";
 
-export const sneakers: Product[] = [
+export const sneakersMock: Product[] = [
   {
     id: 10,
     imageUrl: "https://i.ibb.co/0s3pdnc/adidas-nmd.png",

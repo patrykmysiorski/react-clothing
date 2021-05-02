@@ -12,7 +12,7 @@ const SubNavigation: FunctionComponent<Props> = ({ items }) => {
   return (
     <div className={"sub-navigation"}>
       {items.map((item) => (
-        <div className="nav-item">
+        <div className="nav-item" key={item}>
           <Link to={`/${item}`}>{item}</Link>
         </div>
       ))}
