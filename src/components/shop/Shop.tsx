@@ -1,29 +1,33 @@
 import SubNavigation from "components/subNavigation/SubNavigation";
 import SubPageContainer from "components/subPageContainer/SubPageContainer";
-import React, {FunctionComponent, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "redux/hooks";
-import {asyncFetchCollectionsStart, selectShop} from "redux/shop/shopReducer";
-import {texts} from "texts";
+import React, { FunctionComponent, useEffect } from "react";
+import { useAppDispatch } from "redux/hooks";
+import { asyncFetchCollectionsStart } from "redux/shop/shopReducer";
+import { texts } from "texts";
 import "./shop.scss";
+import { useSelector } from "react-redux";
+import Spinner from "../spinner/Spinner";
+import Collection from "./collection/Collection";
+import { Product } from "models/product";
+import {collectionSelector, isShopFetchingSelector } from "redux/shop/shopSelectors";
+import { usePath } from "hooks/usePath";
 
 const Shop: FunctionComponent = () => {
-  const values: string[] = Object.values(texts.menuSidebar.shop.links);
+  const tabsNames: string[] = Object.values(texts.menuSidebar.shop.links);
   const dispatch = useAppDispatch();
-  const shopStore = useAppSelector(selectShop);
   useEffect(() => {
     dispatch(asyncFetchCollectionsStart());
   }, [dispatch]);
+  const isLoading = useSelector(isShopFetchingSelector);
+  const pathname = usePath();
 
+  const collection: Product[] = useSelector(collectionSelector)(pathname);
   return (
     <SubPageContainer>
       <div className="shop">
-        <SubNavigation items={values} />
+        <SubNavigation items={tabsNames} />
         <div>
-          {shopStore.isFetching ? (
-            <p>extra spinner :)...</p>
-          ) : (
-            <p>extra content!!</p>
-          )}
+          {isLoading ? <Spinner /> : <Collection collection={collection} />}
         </div>
       </div>
     </SubPageContainer>

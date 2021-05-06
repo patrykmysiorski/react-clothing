@@ -1,3 +1,5 @@
+@import "src/styles/colors";
+
 .sub-navigation {
   display: grid;
   text-align: center;
@@ -7,12 +9,16 @@
   text-transform: uppercase;
   margin-top: 40px;
 
-  a {
+  .active {
+    color: $LIGHT_GOLD !important;
+  }
+
+  .link {
     text-decoration: none;
     color: black;
 
     &:hover {
-      color: #eac4b3;
+      color: $LIGHT_GOLD;
     }
   }
 }

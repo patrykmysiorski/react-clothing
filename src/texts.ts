@@ -4,11 +4,11 @@ interface StringIndex {
 
 const shopItems: StringIndex = {
   all: "all",
-  tops: "tops",
-  leggings: "leggings",
-  dresses: "dresses",
-  accessories: "accessories",
-}
+  hats: "hats",
+  jackets: "jackets",
+  mens: "mens",
+  womens: "womens",
+};
 
 const helpItems: StringIndex = {
   contact: "contact",
@@ -16,7 +16,7 @@ const helpItems: StringIndex = {
   "size guide": "size guide",
   "privacy policy": "privacy policy",
   "terms of services": "terms of services",
-}
+};
 
 export const texts = {
   header: {

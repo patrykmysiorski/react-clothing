@@ -1,7 +1,9 @@
+@import "src/styles/colors";
+
 .expand-icon {
   text-align: right;
 
   &:hover {
-    color: #eac4b3;
+    color: $LIGHT_GOLD;
   }
 }

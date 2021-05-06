@@ -1,31 +1,4 @@
 .shop {
   margin: 0 auto;
-  width: calc(100vw - 350px);
-}
-
-.row--1 {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 20px;
-  margin: 30px;
-  background-color: royalblue;
-}
-
-.row--2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 30px;
-  grid-gap: 20px;
-  background-color: rosybrown;
-}
-.row--3 {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin: 30px;
-  grid-gap: 20px;
-  background-color: gold;
-}
-
-.item {
-  padding: 50px;
+  width: calc(100vw - 400px);
 }

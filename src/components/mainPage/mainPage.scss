@@ -1,3 +1,5 @@
+@import "src/styles/colors";
+
 .main-page {
   display: grid;
   align-items: center;
@@ -27,7 +29,7 @@
     margin-top: 40px;
     padding: 15px 30px;
     cursor: pointer;
-    border: 1px solid #eac4b3;
+    border: 1px solid $LIGHT_GOLD;
     border-radius: 2px;
     background-color: white;
     text-transform: uppercase;
@@ -35,7 +37,7 @@
     letter-spacing: 3px;
 
     &:hover {
-      color: #eac4b3;
+      color: $LIGHT_GOLD;
     }
   }
 }
