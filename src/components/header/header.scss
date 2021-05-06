@@ -1,9 +1,11 @@
+@import "src/styles/colors";
+
 .header {
   height: 60px;
   display: grid;
   width: 100%;
   text-align: center;
-  grid-template-columns: repeat(8, 12.5%);
+  grid-template-columns: repeat(8, 1fr);
   color: white;
   align-items: center;
   text-transform: uppercase;
@@ -14,7 +16,7 @@
     color: white;
 
     &:hover {
-      color: #eac4b3;
+      color: $LIGHT_GOLD;
     }
   }
 
@@ -22,7 +24,7 @@
     cursor: pointer;
 
     &:hover {
-      color: #eac4b3;
+      color: $LIGHT_GOLD;
     }
   }
 
@@ -42,7 +44,7 @@
       border: 2px solid white;
 
       &:hover {
-        border: 2px solid #eac4b3;
+        border: 2px solid $LIGHT_GOLD;
       }
     }
   }
