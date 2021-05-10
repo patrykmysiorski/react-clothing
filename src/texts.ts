@@ -43,4 +43,7 @@ export const texts = {
     mainParagraph: "Modern & Edgy",
     button: "start shopping now",
   },
+  cart: {
+    header: 'Shopping Cart'
+  }
 };
