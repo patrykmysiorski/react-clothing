@@ -4,14 +4,19 @@ import { texts } from "../../texts";
 import { Link, useLocation } from "react-router-dom";
 import useMenu from "../../hooks/useMenu";
 import useCart from "../../hooks/useCart";
+import { useSelector } from "react-redux";
+import { cartItemsNumberSelector } from "redux/cart/cartSelectors";
+import classNames from "classnames";
 
 const Header: FunctionComponent = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
   const { isCartOpen, setIsCartOpen } = useCart();
   const location = useLocation();
+  const itemsNumber = useSelector(cartItemsNumberSelector);
+  const isMainPage = location?.pathname === "/";
 
   return (
-    <div className={`header ${location?.pathname !== "/" ? "black-font" : ""}`}>
+    <div className={classNames("header", { "black-font": !isMainPage })}>
       <span
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="menu-element material-icons"
@@ -29,7 +34,9 @@ const Header: FunctionComponent = () => {
         className="menu-element cart-icon"
         onClick={() => setIsCartOpen(!isCartOpen)}
       >
-        <div className="border">7</div>
+        <div className={classNames("border", { "black-border": !isMainPage })}>
+          {itemsNumber}
+        </div>
       </div>
     </div>
   );

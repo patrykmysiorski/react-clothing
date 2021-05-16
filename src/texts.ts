@@ -44,6 +44,7 @@ export const texts = {
     button: "start shopping now",
   },
   cart: {
-    header: 'Shopping Cart'
+    header: 'Shopping Cart',
+    totalPrice: 'subtotal'
   }
 };

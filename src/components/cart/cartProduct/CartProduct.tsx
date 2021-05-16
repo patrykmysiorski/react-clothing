@@ -1,26 +1,46 @@
-import {Product} from "models/product";
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import styles from "./cartProduct.module.scss";
+import {
+  addToCart,
+  ICartProduct,
+  reduceQuantity,
+} from "redux/cart/cartReducer";
+import { useAppDispatch } from "redux/hooks";
 
 interface OwnProps {
-  product: Product;
+  product: ICartProduct;
 }
 
 type Props = OwnProps;
 
 const CartProduct: FunctionComponent<Props> = ({ product }) => {
+  const dispatch = useAppDispatch();
+  const prepareProductName = (name: string) => {
+    if (name.length > 14) {
+      return `${name.slice(0, 14)}...`;
+    } else {
+      return name;
+    }
+  };
   return (
     <div className={`${styles.cartProduct} m-top-1`}>
-      <img
-        className={""}
-        src={product.imageUrl}
-        alt=""
-        width={60}
-        height={80}
-      />
-      <div className={styles.name}>{product.name}</div>
-      <div className={styles.description}>small/medium</div>
-      <div className={styles.smallProductImage}>${product.price}</div>
+      <img src={product.imageUrl} width={50} height={80} alt={"product"} />
+      <div className={styles.name}>{prepareProductName(product.name)}</div>
+      <span
+        onClick={() => console.log("delete")}
+        className={`${styles.delete} material-icons`}
+      >
+        close
+      </span>
+      <div className={styles.description}>
+        <i>small / medium</i>
+      </div>
+      <div className={styles.quantity}>
+        <div onClick={() => dispatch(reduceQuantity(product))}>-</div>
+        <div>{product.quantity}</div>
+        <div onClick={() => dispatch(addToCart(product))}>+</div>
+      </div>
+      <div className={styles.price}>${product.price * product.quantity}</div>
     </div>
   );
 };

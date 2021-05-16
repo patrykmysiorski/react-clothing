@@ -10,6 +10,9 @@
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 
   a {
     text-decoration: none;
@@ -46,6 +49,10 @@
       &:hover {
         border: 2px solid $LIGHT_GOLD;
       }
+    }
+
+    .black-border {
+      border: 2px solid black;
     }
   }
 }

@@ -1,3 +1,5 @@
+@import "src/styles/colors";
+
 .cart {
   position: fixed;
   width: 320px;
@@ -23,4 +25,20 @@
   width: 280px;
   height: 75%;
   overflow-y: auto;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    &:first-child {
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
 }

@@ -25,19 +25,8 @@
     letter-spacing: -5px;
   }
 
-  button {
-    margin-top: 40px;
-    padding: 15px 30px;
-    cursor: pointer;
-    border: 1px solid $LIGHT_GOLD;
-    border-radius: 2px;
-    background-color: white;
-    text-transform: uppercase;
-    color: #aaa;
-    letter-spacing: 3px;
-
-    &:hover {
-      color: $LIGHT_GOLD;
-    }
+  .button-wrapper {
+    margin: 0 auto;
+    width: 300px;
   }
 }
