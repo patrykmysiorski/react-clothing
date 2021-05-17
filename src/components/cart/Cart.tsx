@@ -2,20 +2,20 @@ import React, { FunctionComponent } from "react";
 import styles from "./cart.module.scss";
 import useCart from "../../hooks/useCart";
 import { useSelector } from "react-redux";
-import {
-  cartSelector,
-  totalPriceSelector,
-} from "redux/cart/cartSelectors";
+import { cartSelector, totalPriceSelector } from "redux/cart/cartSelectors";
 import CartProduct from "./cartProduct/CartProduct";
 import { texts } from "texts";
 import Button from "../button/Button";
-import { ICartProduct } from "redux/cart/cartReducer";
+import { ICartProduct, removeAllFromCart } from "redux/cart/cartReducer";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "redux/hooks";
 
 const Cart: FunctionComponent = () => {
   const { isCartOpen } = useCart();
   const products: ICartProduct[] = useSelector(cartSelector);
   const totalPrice = useSelector(totalPriceSelector);
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -31,11 +31,16 @@ const Cart: FunctionComponent = () => {
         <p>{texts.cart.totalPrice}</p>
         <p>${totalPrice}</p>
       </div>
-      <Button
-        text={"CHECK OUT"}
-        wrapperClassName={styles.button}
-        revertColors={true}
-      />
+      <Link to={"/checkout"}>
+        <Button
+          text={"CHECK OUT"}
+          wrapperClassName={styles.button}
+          revertColors={true}
+        />
+      </Link>
+      <h4 className={"m-top-3"} onClick={() => dispatch(removeAllFromCart())}>
+        {texts.cart.clearCart}
+      </h4>
     </div>
   );
 };

@@ -45,6 +45,7 @@ export const texts = {
   },
   cart: {
     header: 'Shopping Cart',
-    totalPrice: 'subtotal'
+    totalPrice: 'subtotal',
+    clearCart: 'clear cart'
   }
 };

@@ -4,6 +4,7 @@ import {
   addToCart,
   ICartProduct,
   reduceQuantity,
+  removeFromCart,
 } from "redux/cart/cartReducer";
 import { useAppDispatch } from "redux/hooks";
 
@@ -27,7 +28,7 @@ const CartProduct: FunctionComponent<Props> = ({ product }) => {
       <img src={product.imageUrl} width={50} height={80} alt={"product"} />
       <div className={styles.name}>{prepareProductName(product.name)}</div>
       <span
-        onClick={() => console.log("delete")}
+        onClick={() => dispatch(removeFromCart(product.id))}
         className={`${styles.delete} material-icons`}
       >
         close
