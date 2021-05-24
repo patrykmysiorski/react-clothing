@@ -1,0 +1,27 @@
+@import "src/styles/colors";
+
+.button {
+  width: 100%;
+  margin-top: 40px;
+  padding: 15px 30px;
+  cursor: pointer;
+  border: 1px solid $LIGHT_GOLD;
+  border-radius: 2px;
+  background-color: white;
+  text-transform: uppercase;
+  color: #aaa;
+  letter-spacing: 3px;
+
+  &:hover {
+    color: $LIGHT_GOLD;
+  }
+}
+
+.reverted {
+  color: white;
+  background-color: $LIGHT_GOLD;
+  &:hover {
+    background-color: white;
+    color: $LIGHT_GOLD;
+  }
+}

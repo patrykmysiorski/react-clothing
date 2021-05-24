@@ -19,9 +19,9 @@ const App = () => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
-    if (isCartOpen) {
-      setIsCartOpen(false);
-    }
+    // if (isCartOpen) {
+    //   setIsCartOpen(false);
+    // }
   };
 
   return (

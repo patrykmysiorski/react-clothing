@@ -1,0 +1,51 @@
+@import "src/styles/colors";
+
+.cart {
+  position: fixed;
+  width: 320px;
+  height: 100%;
+  background-color: #151719;
+  right: -320px;
+  transition: all 500ms linear;
+  padding: 20px;
+
+  h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-align: center;
+  }
+  h4 {
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+}
+
+.cartActive {
+  right: 0;
+}
+
+.cartProductContainer {
+  width: 280px;
+  height: 75%;
+  overflow-y: auto;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    &:first-child {
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
+}

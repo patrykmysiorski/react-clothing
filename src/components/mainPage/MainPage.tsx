@@ -1,6 +1,8 @@
 import React from "react";
 import "./mainPage.scss";
-import {texts} from "../../texts";
+import Button from "../button/Button";
+import { texts } from "texts";
+import { Link } from "react-router-dom";
 
 const MainPage: React.FC = () => {
   return (
@@ -8,7 +10,9 @@ const MainPage: React.FC = () => {
       <div>
         <p>{texts.mainPage.smallParagraph}</p>
         <h1>{texts.mainPage.mainParagraph}</h1>
-        <button>{texts.mainPage.button}</button>
+        <Link to={"/shop"}>
+          <Button text={texts.mainPage.button} className={"button-wrapper"} />
+        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,10 @@
-import { useContext } from "react";
-import CartContext, { ICartContext } from "../contexts/CartContext";
+// const useCart = () => ({
+//   isCartOpen: true,
+//   setIsCartOpen: (isCartOpen: boolean) => {},
+// });
+
+import CartContext, {ICartContext} from "contexts/CartContext";
+import {useContext} from "react";
 
 const useCart = () => useContext<ICartContext>(CartContext);
 
