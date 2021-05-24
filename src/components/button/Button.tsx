@@ -8,11 +8,11 @@ interface OwnProps {
   revertColors?: boolean;
 }
 
-type Props = OwnProps;
+type Props = OwnProps & React.HTMLAttributes<HTMLElement>;
 
-const Button: React.FC<Props> = ({ text, wrapperClassName, revertColors }) => {
+const Button: React.FC<Props> = ({ text, className, revertColors }) => {
   return (
-    <div className={wrapperClassName}>
+    <div className={classNames(className)}>
       <button
         className={classNames(styles.button, {
           [styles.reverted]: revertColors,

@@ -1,8 +1,8 @@
 import React from "react";
 import "./mainPage.scss";
 import Button from "../button/Button";
-import {texts} from "texts";
-import {Link} from "react-router-dom";
+import { texts } from "texts";
+import { Link } from "react-router-dom";
 
 const MainPage: React.FC = () => {
   return (
@@ -11,10 +11,7 @@ const MainPage: React.FC = () => {
         <p>{texts.mainPage.smallParagraph}</p>
         <h1>{texts.mainPage.mainParagraph}</h1>
         <Link to={"/shop"}>
-          <Button
-            text={texts.mainPage.button}
-            wrapperClassName={"button-wrapper"}
-          />
+          <Button text={texts.mainPage.button} className={"button-wrapper"} />
         </Link>
       </div>
     </div>

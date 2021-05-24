@@ -17,8 +17,8 @@ type Props = OwnProps;
 const CartProduct: FunctionComponent<Props> = ({ product }) => {
   const dispatch = useAppDispatch();
   const prepareProductName = (name: string) => {
-    if (name.length > 14) {
-      return `${name.slice(0, 14)}...`;
+    if (name.length > 10) {
+      return `${name.slice(0, 10)}...`;
     } else {
       return name;
     }

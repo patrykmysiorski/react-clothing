@@ -34,7 +34,7 @@ const Cart: FunctionComponent = () => {
       <Link to={"/checkout"}>
         <Button
           text={"CHECK OUT"}
-          wrapperClassName={styles.button}
+          className={styles.button}
           revertColors={true}
         />
       </Link>
