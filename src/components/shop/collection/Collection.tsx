@@ -1,9 +1,10 @@
-import {Product} from "models/product";
-import React, {FunctionComponent} from "react";
-import {addToCart} from "redux/cart/cartReducer";
+import { Product } from "models/product";
+import React, { FunctionComponent } from "react";
+import { addToCart } from "redux/cart/cartReducer";
 import "./collection.scss";
-import {useAppDispatch} from "redux/hooks";
+import { useAppDispatch } from "redux/hooks";
 import useCart from "hooks/useCart";
+import { Link } from "react-router-dom";
 
 interface Props {
   collection: Product[];
@@ -21,17 +22,19 @@ const Collection: FunctionComponent<Props> = ({ collection }) => {
   return (
     <div className={"collection-container"}>
       {collection.map((product) => (
-        <div className="product" key={product.id}>
-          <div
-            onClick={() => onAddToCart(product)}
-            className="image"
-            style={{
-              backgroundImage: `url(${product.imageUrl})`,
-            }}
-          />
-          <p className={"m-top-1 m-bottom-1"}>{product.name}</p>
-          <p>{`${product.price}$`}</p>
-        </div>
+        <Link to={`/product/${product.id}`}>
+          <div className="product" key={product.id}>
+            <div
+              // onClick={() => onAddToCart(product)}
+              className="image"
+              style={{
+                backgroundImage: `url(${product.imageUrl})`,
+              }}
+            />
+            <p className={"m-top-1 m-bottom-1"}>{product.name}</p>
+            <p>{`${product.price}$`}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
