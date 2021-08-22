@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Header from "./components/header/Header";
 import "./app.scss";
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Shop from "./components/shop/Shop";
 import Brand from "./components/brand/Brand";
 import Contact from "./components/contact/Contact";
@@ -11,6 +11,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import MenuContext from "./contexts/MenuContext";
 import CartContext from "./contexts/CartContext";
 import Cart from "./components/cart/Cart";
+import Checkout from "./components/checkout/Checkout";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -60,6 +61,9 @@ const App = () => {
                 </Route>
                 <Route path="/help">
                   <Help />
+                </Route>
+                <Route path="/checkout">
+                  <Checkout />
                 </Route>
                 <Route path="/">
                   <MainPage />
