@@ -13,39 +13,37 @@ type Props = OwnProps;
 const OrderPreviewSection: FunctionComponent<Props> = (props) => {
   return (
     <div className={"black-font"}>
-      <Grid fluid>
-        <Row>
-          <Col xs={6}>
-            <Row center={"xs"}>
-              <Col>
-                <CartSummary />
-              </Col>
-            </Row>
-            <Row center={"xs"}>
-              <Col>
-                <DeliveryPrediction />
-              </Col>
-            </Row>
-            <Row center={"xs"}>
-              <Col>
-                <AvailablePaymentTypes />
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={6}>
-            <Row center={"xs"}>
-              <Col>
-                <TotalPrice />
-              </Col>
-            </Row>
-            <Row center={"xs"}>
-              <Col>
-                <Discount />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <Col xs={9}>
+          <Row center={"xs"}>
+            <Col>
+              <CartSummary />
+            </Col>
+          </Row>
+          <Row center={"xs"}>
+            <Col>
+              <DeliveryPrediction />
+            </Col>
+          </Row>
+          <Row center={"xs"}>
+            <Col>
+              <AvailablePaymentTypes />
+            </Col>
+          </Row>
+        </Col>
+        <Col xs={3}>
+          <Row>
+            <Col>
+              <TotalPrice />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Discount />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     </div>
   );
 };
