@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from "react";
-import CartSummary from "./order-preview/CartSummary";
 import AvailablePaymentTypes from "./order-preview/AvailablePaymentTypes";
 import DeliveryPrediction from "./order-preview/DeliveryPrediction";
-import { Grid, Col, Row } from "react-flexbox-grid";
+import { Col, Row } from "react-flexbox-grid";
 import TotalPrice from "./order-preview/TotalPrice";
 import Discount from "./order-preview/Discount";
 
@@ -15,11 +14,6 @@ const OrderPreviewSection: FunctionComponent<Props> = (props) => {
     <div className={"black-font"}>
       <Row>
         <Col xs={9}>
-          <Row center={"xs"}>
-            <Col>
-              <CartSummary />
-            </Col>
-          </Row>
           <Row center={"xs"}>
             <Col>
               <DeliveryPrediction />
