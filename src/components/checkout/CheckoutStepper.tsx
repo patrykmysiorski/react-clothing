@@ -16,6 +16,25 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const CheckoutStepper: FunctionComponent<Props> = (props) => {
+  const { goToNextStep } = useCheckoutStepper();
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <CheckoutFirstStep onFinish={goToNextStep} />;
+      case 1:
+        return <CheckoutSecondStep onFinish={goToNextStep} />;
+      case 2:
+        return (
+          <CheckoutThirdStep
+            onFinish={() => alert("I should go to summary after payment :)")}
+          />
+        );
+      default:
+        return "Unknown step";
+    }
+  };
+
   return (
     <HorizontalNonLinearStepper
       steps={["Login/signup", "Shipping", "$ Payment $"]}
@@ -23,19 +42,6 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
     />
   );
 };
-
-function getStepContent(step: number) {
-  switch (step) {
-    case 0:
-      return <CheckoutFirstStep />;
-    case 1:
-      return <CheckoutSecondStep />;
-    case 2:
-      return <CheckoutThirdStep />;
-    default:
-      return "Unknown step";
-  }
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,10 +72,12 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
   getStepContent,
 }) => {
   const classes = useStyles();
-  const { activeStep, setActiveStep } = useCheckoutStepper();
-  const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>(
-    {}
-  );
+  const {
+    activeStep,
+    setActiveStep,
+    completed,
+    setCompleted,
+  } = useCheckoutStepper();
 
   const totalSteps = () => {
     return steps.length;

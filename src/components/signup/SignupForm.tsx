@@ -4,12 +4,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   Avatar,
-  Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
   Grid,
   Link,
   TextField,
@@ -17,24 +14,9 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-interface OwnProps {
-  onSubmitSuccess: () => void;
-}
+interface OwnProps {}
 
 type Props = OwnProps;
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Mysiorski&Walat&Stasiak
-      </Link>
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -55,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
-  const SignInSchema = Yup.object().shape({
+const SignupForm: FunctionComponent<Props> = (props) => {
+  const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email")
       .required("Please, enter your email"),
@@ -66,16 +48,26 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
       ),
+    confirmPassword: Yup.string()
+      .required("Please confirm your password.")
+      .when("password", {
+        //@ts-ignore
+        is: (password) => (password && password.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("password")],
+          "Password doesn't match"
+        ),
+      }),
   });
-
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
-    validationSchema: SignInSchema,
+    validationSchema: SignupSchema,
     onSubmit: (values) => {
-      onSubmitSuccess();
+      console.log(JSON.stringify(values, null, 2));
     },
   });
 
@@ -88,13 +80,9 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={formik.handleSubmit}
-        >
+        <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -125,9 +113,24 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
           />
           <Button
             type="submit"
@@ -136,27 +139,19 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Already registered? Log In"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
