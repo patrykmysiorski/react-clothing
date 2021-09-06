@@ -24,7 +24,7 @@ export const texts = {
     brand: "brand",
     contact: "contact",
     help: "help",
-    logo: "M & S",
+    logo: "M  & S & W",
   },
   menuSidebar: {
     menu: "menu",
@@ -44,8 +44,8 @@ export const texts = {
     button: "start shopping now",
   },
   cart: {
-    header: 'Shopping Cart',
-    totalPrice: 'subtotal',
-    clearCart: 'clear cart'
-  }
+    header: "Shopping Cart",
+    totalPrice: "subtotal",
+    clearCart: "clear cart",
+  },
 };

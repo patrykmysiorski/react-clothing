@@ -9,7 +9,7 @@ import useCheckoutStepper from "../../hooks/useCheckoutStepper";
 import CheckoutSecondStep from "./steps/CheckoutSecondStep";
 import CheckoutFirstStep from "./steps/CheckoutFirstStep";
 import CheckoutThirdStep from "./steps/CheckoutThirdStep";
-import { Box, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 interface OwnProps {}
 
@@ -152,7 +152,7 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
             <Typography className={classes.instructions}>
               <Container>{getStepContent(activeStep)}</Container>
             </Typography>
-            <Box display="flex" justifyContent="center">
+            {/*            <Box display="flex" justifyContent="center">
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
@@ -168,7 +168,7 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
               >
                 Next
               </Button>
-            </Box>
+            </Box>*/}
           </div>
         )}
       </div>

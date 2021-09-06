@@ -16,6 +16,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { signIn } from "../../firebase/auth";
+import { Link as Dupa } from "react-router-dom";
 
 interface OwnProps {
   onSubmitSuccess: () => void;
@@ -27,10 +29,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Mysiorski&Walat&Stasiak
-      </Link>
-      {new Date().getFullYear()}
+      <Link color="inherit">Mysiorski&Stasiak&Walat</Link>
+      {" " + new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -75,7 +75,7 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
     },
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      onSubmitSuccess();
+      signIn(values.email, values.password, onSubmitSuccess);
     },
   });
 
@@ -145,9 +145,9 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Dupa to={"/signup"}>
+                <Link variant="body2">{"Don't have an account? Sign Up"}</Link>
+              </Dupa>
             </Grid>
           </Grid>
         </form>

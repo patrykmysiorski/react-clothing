@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { auth } from "../../firebase/auth";
 
 interface OwnProps {}
 
@@ -67,7 +68,7 @@ const SignupForm: FunctionComponent<Props> = (props) => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      auth(values.email, values.password);
     },
   });
 
