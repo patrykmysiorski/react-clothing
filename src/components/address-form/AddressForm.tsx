@@ -6,7 +6,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { Button, CssBaseline } from "@material-ui/core";
+import {
+  Button,
+  CssBaseline,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -34,6 +40,10 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
     "Zachodniopomorskie",
   ];
 
+  const deliverySchema = Yup.object().shape({
+    delivery: Yup.string().required("Please, select delivery option"),
+  });
+
   const AddressSchema = Yup.object().shape({
     firstName: Yup.string().required("Please, enter your name"),
     lastName: Yup.string().required("Please, enter your last name"),
@@ -44,10 +54,12 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
       .required("Please, enter address")
       .min(5, "Zip code should be of minimum 5 characters length"),
     country: Yup.string().required("Please, enter  country"),
+    delivery: Yup.string().required("Please, select delivery option"),
   });
 
   const formik = useFormik({
     initialValues: {
+      delivery: "",
       firstName: "",
       lastName: "",
       address: "",
@@ -194,6 +206,22 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
             />
           </Grid>
         </Grid>
+        <FormLabel component="legend">Delivery type</FormLabel>
+        <RadioGroup
+          aria-label="delivery"
+          name="delivery"
+          value={formik.values.delivery}
+          onChange={formik.handleChange}
+        >
+          <FormControlLabel control={<Radio />} label={"UPS"} value="UPS" />
+          <FormControlLabel control={<Radio />} label={"DHL"} value="DHL" />
+          <FormControlLabel
+            control={<Radio />}
+            label={"InPost"}
+            value="InPost"
+          />
+        </RadioGroup>
+
         <Button variant="contained" color="primary" type="submit">
           CHECK
         </Button>

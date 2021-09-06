@@ -153,7 +153,6 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
               <Container>{getStepContent(activeStep)}</Container>
             </Typography>
             <Box display="flex" justifyContent="center">
-              …
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
@@ -169,22 +168,6 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
               >
                 Next
               </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography variant="caption" className={classes.completed}>
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleComplete}
-                  >
-                    {completedSteps() === totalSteps() - 1
-                      ? "Finish"
-                      : "Complete Step"}
-                  </Button>
-                ))}
             </Box>
           </div>
         )}

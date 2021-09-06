@@ -8,10 +8,10 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const CheckoutThirdStep: FunctionComponent<Props> = (props) => {
+const CheckoutThirdStep: FunctionComponent<Props> = ({ onFinish }) => {
   return (
     <Container maxWidth={"sm"}>
-      <PaymentForm onSuccessfulPayment={props.onFinish} />
+      <PaymentForm onSuccessfulPayment={onFinish} />
     </Container>
   );
 };
