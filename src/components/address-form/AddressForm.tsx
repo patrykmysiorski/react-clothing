@@ -40,10 +40,6 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
     "Zachodniopomorskie",
   ];
 
-  const deliverySchema = Yup.object().shape({
-    delivery: Yup.string().required("Please, select delivery option"),
-  });
-
   const AddressSchema = Yup.object().shape({
     firstName: Yup.string().required("Please, enter your name"),
     lastName: Yup.string().required("Please, enter your last name"),

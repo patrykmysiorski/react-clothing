@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Link as Dupa } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -144,9 +145,9 @@ const SignupForm: FunctionComponent<Props> = (props) => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Already registered? Log In"}
-              </Link>
+              <Dupa to={"/checkout"}>
+                <Link variant="body2">{"Already registered? Log In"}</Link>
+              </Dupa>
             </Grid>
           </Grid>
         </form>

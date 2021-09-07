@@ -9,8 +9,13 @@ import { useSelector } from "react-redux";
 import Spinner from "../spinner/Spinner";
 import Collection from "./collection/Collection";
 import { Product } from "models/product";
-import {collectionSelector, isShopFetchingSelector } from "redux/shop/shopSelectors";
+import {
+  collectionSelector,
+  isShopFetchingSelector,
+} from "redux/shop/shopSelectors";
 import { usePath } from "hooks/usePath";
+import { getAll } from "../../firebase/clothes/clothesCrud";
+import PortalModal from "../modal/PortalModal";
 
 const Shop: FunctionComponent = () => {
   const tabsNames: string[] = Object.values(texts.menuSidebar.shop.links);
@@ -18,6 +23,12 @@ const Shop: FunctionComponent = () => {
   useEffect(() => {
     dispatch(asyncFetchCollectionsStart());
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log("halo");
+    console.log("elo", getAll());
+  }, []);
+
   const isLoading = useSelector(isShopFetchingSelector);
   const pathname = usePath();
 
@@ -26,6 +37,7 @@ const Shop: FunctionComponent = () => {
     <SubPageContainer>
       <div className="shop">
         <SubNavigation items={tabsNames} />
+        <PortalModal />
         <div>
           {isLoading ? <Spinner /> : <Collection collection={collection} />}
         </div>
