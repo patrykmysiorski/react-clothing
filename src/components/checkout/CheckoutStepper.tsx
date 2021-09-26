@@ -10,6 +10,7 @@ import CheckoutSecondStep from "./steps/CheckoutSecondStep";
 import CheckoutFirstStep from "./steps/CheckoutFirstStep";
 import CheckoutThirdStep from "./steps/CheckoutThirdStep";
 import { Container } from "@material-ui/core";
+import { useAuth } from "../../hooks/useAuth";
 
 interface OwnProps {}
 
@@ -17,10 +18,14 @@ type Props = OwnProps;
 
 const CheckoutStepper: FunctionComponent<Props> = (props) => {
   const { goToNextStep } = useCheckoutStepper();
-
+  // @ts-ignore
+  const { user } = useAuth();
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
+        if (user) {
+          goToNextStep();
+        }
         return <CheckoutFirstStep onFinish={goToNextStep} />;
       case 1:
         return <CheckoutSecondStep onFinish={goToNextStep} />;

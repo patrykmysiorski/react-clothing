@@ -7,6 +7,7 @@ import useCart from "../../hooks/useCart";
 import { useSelector } from "react-redux";
 import { cartItemsNumberSelector } from "redux/cart/cartSelectors";
 import classNames from "classnames";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header: FunctionComponent = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
@@ -14,7 +15,8 @@ const Header: FunctionComponent = () => {
   const location = useLocation();
   const itemsNumber = useSelector(cartItemsNumberSelector);
   const isMainPage = location?.pathname === "/";
-
+  // @ts-ignore
+  const { user } = useAuth();
   return (
     <div className={classNames("header", { "black-font": !isMainPage })}>
       <span

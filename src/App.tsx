@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/header/Header";
 import "./app.scss";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Shop from "./components/shop/Shop";
 import Brand from "./components/brand/Brand";
 import Contact from "./components/contact/Contact";
@@ -17,6 +17,7 @@ import LoginForm from "./components/login/LoginForm";
 import { createTheme, MuiThemeProvider } from "@material-ui/core";
 import { green, orange } from "@material-ui/core/colors";
 import SignupForm from "./components/signup/SignupForm";
+import { useAuth } from "./hooks/useAuth";
 
 const theme = createTheme({
   palette: {
@@ -96,6 +97,9 @@ const App = () => {
                   <Route path="/help">
                     <Help/>
                   </Route>
+                  {/*<PrivateRoute exact path="/">*/}
+                  {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
+                  {/*</PrivateRoute>*/}
                   <Route path="/checkout">
                     <CheckoutStepperContext.Provider
                         value={{
@@ -128,6 +132,29 @@ const App = () => {
           </MenuContext.Provider>
         </div>
       </MuiThemeProvider>
+  );
+};
+
+// @ts-ignore
+const PrivateRoute = ({children, ...rest}) => {
+  // @ts-ignore
+  const {user} = useAuth();
+  return (
+      <Route
+          {...rest}
+          render={() => (user ? children : <Redirect to={"/login"}/>)}
+      />
+  );
+};
+// @ts-ignore
+const PrincipalRestrictedRoute = ({children, ...rest}) => {
+  // @ts-ignore
+  const {user} = useAuth();
+  return (
+      <Route
+          {...rest}
+          render={() => (user ? children : <Redirect to={"/logout"}/>)}
+      />
   );
 };
 

@@ -10,8 +10,6 @@ export const auth = async (email, password) => {
       const user = await firebaseInstance
         .auth()
         .createUserWithEmailAndPassword(email, password);
-      console.log("user", user);
-      alert(`Welcome ${email.value}!`);
     }
   } catch (error) {
     console.log("error", error);

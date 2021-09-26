@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { auth } from "../../firebase/auth";
+import { auth, signIn } from "../../firebase/auth";
 
 interface OwnProps {}
 
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignupForm: FunctionComponent<Props> = (props) => {
+  const { push } = useHistory();
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email")
@@ -69,7 +70,11 @@ const SignupForm: FunctionComponent<Props> = (props) => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      auth(values.email, values.password);
+      auth(values.email, values.password).then(() => {
+        signIn(values.email, values.password).then(() => {
+          push("/checkout");
+        });
+      });
     },
   });
 
