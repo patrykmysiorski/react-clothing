@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { signIn } from "../../firebase/auth";
-import { Link as Dupa } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 interface OwnProps {
   onSubmitSuccess: () => void;
@@ -140,14 +140,15 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              {/**/}
+              <RouterLink to={"/reset-password"}>
+                <Link variant="body2">Forgot password?</Link>
+              </RouterLink>
             </Grid>
             <Grid item>
-              <Dupa to={"/signup"}>
+              <RouterLink to={"/signup"}>
                 <Link variant="body2">{"Don't have an account? Sign Up"}</Link>
-              </Dupa>
+              </RouterLink>
             </Grid>
           </Grid>
         </form>

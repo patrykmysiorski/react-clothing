@@ -34,6 +34,18 @@ export const signIn = async (email, password, onSuccess) => {
   }
 };
 
+export const resetPassword = async (email) => {
+  firebaseInstance
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {})
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+};
+
 export const usePrincipal = () => {
   const [currentUser, setCurrentUser] = useState(null);
 

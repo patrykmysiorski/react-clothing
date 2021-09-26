@@ -1,8 +1,8 @@
-import {Product} from "models/product";
-import React, {FunctionComponent} from "react";
-import {addToCart} from "redux/cart/cartReducer";
+import { Product } from "models/product";
+import React, { FunctionComponent } from "react";
+import { addToCart } from "redux/cart/cartReducer";
 import "./collection.scss";
-import {useAppDispatch} from "redux/hooks";
+import { useAppDispatch } from "redux/hooks";
 import useCart from "hooks/useCart";
 
 interface Props {

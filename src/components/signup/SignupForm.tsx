@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link as Dupa } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -54,7 +54,7 @@ const SignupForm: FunctionComponent<Props> = (props) => {
       .required("Please confirm your password.")
       .when("password", {
         //@ts-ignore
-        is: (password) => (password && password.length > 0 ? true : false),
+        is: (password) => password && password.length > 0,
         then: Yup.string().oneOf(
           [Yup.ref("password")],
           "Password doesn't match"
@@ -145,9 +145,9 @@ const SignupForm: FunctionComponent<Props> = (props) => {
           </Button>
           <Grid container>
             <Grid item>
-              <Dupa to={"/checkout"}>
+              <RouterLink to={"/checkout"}>
                 <Link variant="body2">{"Already registered? Log In"}</Link>
-              </Dupa>
+              </RouterLink>
             </Grid>
           </Grid>
         </form>

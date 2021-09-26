@@ -29,6 +29,16 @@ export const shopSlice = createSlice({
       state.isFetching = false;
       state.isFailed = true;
     },
+    postClothSuccess: (state) => {
+      state.isFetching = false;
+    },
+    asyncPostClothStart: (state, action: PayloadAction<any>) => {
+      state.isFetching = true;
+    },
+    postClothFailed: (state) => {
+      state.isFetching = false;
+      state.isFailed = true;
+    },
   },
 });
 
@@ -36,6 +46,9 @@ export const {
   fetchCollectionsSuccess,
   asyncFetchCollectionsStart,
   fetchCollectionsFailed,
+  postClothFailed,
+  asyncPostClothStart,
+  postClothSuccess,
 } = shopSlice.actions;
 
 export const selectShop = (state: RootState) => state.shop;

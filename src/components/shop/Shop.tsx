@@ -14,7 +14,6 @@ import {
   isShopFetchingSelector,
 } from "redux/shop/shopSelectors";
 import { usePath } from "hooks/usePath";
-import { getAll } from "../../firebase/clothes/clothesCrud";
 import PortalModal from "../modal/PortalModal";
 
 const Shop: FunctionComponent = () => {
@@ -23,11 +22,6 @@ const Shop: FunctionComponent = () => {
   useEffect(() => {
     dispatch(asyncFetchCollectionsStart());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log("halo");
-    console.log("elo", getAll());
-  }, []);
 
   const isLoading = useSelector(isShopFetchingSelector);
   const pathname = usePath();

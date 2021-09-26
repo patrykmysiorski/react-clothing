@@ -17,7 +17,7 @@ const PortalModal: FunctionComponent<Props> = (props) => {
       >
         Add new ciuch
       </IconButton>
-      <Modal open={isOpened}>
+      <Modal open={isOpened} onClose={() => setOpened(false)}>
         <Card>
           <NewProductForm />
         </Card>

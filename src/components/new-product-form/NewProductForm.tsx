@@ -5,13 +5,16 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Button, CssBaseline } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { addCloth } from "../../firebase/clothes/clothesCrud";
+import { useAppDispatch } from "../../redux/hooks";
+import { asyncPostClothStart } from "../../redux/shop/shopReducer";
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
 const NewProductForm: FunctionComponent<Props> = (props) => {
+  const dispatch = useAppDispatch();
+
   const schema = Yup.object().shape({
     name: Yup.string().required("Please, enter your name"),
     imageUrl: Yup.string().required("Please, enter your Image url"),
@@ -28,7 +31,7 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      addCloth(values.name, values.imageUrl, values.price, values.type, "uni");
+      dispatch(asyncPostClothStart({ ...values, sex: "uni" }));
     },
   });
 

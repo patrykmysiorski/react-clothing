@@ -11,10 +11,25 @@ const firebaseConfig = {
   apiKey: "AIzaSyAw3X1iZh7Xtx-L9xcufupYwesSjVFiR-U",
   authDomain: "react-clothing-api.firebaseapp.com",
   projectId: "react-clothing-api",
-  storageBucket: "react-clothing-api.appspot.com",
+  storageBucket: "reaxct-clothing-api.appspot.com",
   messagingSenderId: "1018870353131",
   appId: "1:1018870353131:web:6dabe2c172186c99b742ae",
   measurementId: "G-26NSMY7PWQ",
+  userProfile: "users", // where profiles are stored in database
+  useFirestoreForProfile: true, // use Firestore for profile instead of RTDB
+  profileParamsToPopulate: [
+    { child: "role", root: "roles" }, // populates user's role with matching role object from roles
+  ],
+  profileFactory: (user) => {
+    const profile = {
+      email: user.email || user.providerData[0].email,
+      role: "user",
+    };
+    if (user.providerData && user.providerData.length) {
+      profile.providerData = user.providerData;
+    }
+    return profile;
+  },
 };
 
 // Initialize Firebase

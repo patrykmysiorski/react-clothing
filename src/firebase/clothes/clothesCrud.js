@@ -15,7 +15,7 @@ export const getAll = async () => {
 
         tutorials.push({
           id: id,
-          title: data.get("name"),
+          name: data.get("name"),
           imageUrl: data.get("imageUrl"),
           price: data.get("price"),
           sex: data.get("sex"),
@@ -28,7 +28,7 @@ export const getAll = async () => {
     });
 };
 
-export const addCloth = (name, imageUrl, price, type, sex) => {
+export const addCloth = ({ name, imageUrl, price, type, sex }) => {
   tutorialsRef
     .add({
       name,
@@ -38,9 +38,9 @@ export const addCloth = (name, imageUrl, price, type, sex) => {
       sex,
     })
     .then(function (docRef) {
-      console.log("Tutorial created with ID: ", docRef.id);
+      alert("Tutorial created with ID: ", docRef.id);
     })
     .catch(function (error) {
-      console.error("Error adding Tutorial: ", error);
+      alert("Error adding Tutorial: ", error);
     });
 };
