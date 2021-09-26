@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Collections } from "models/collections";
 import { RootState } from "redux/store";
+import { ClothesFetchParams } from "../../components/shop/Shop";
 
 interface ShopState {
   collections: Collections;
@@ -22,7 +23,10 @@ export const shopSlice = createSlice({
       state.isFetching = false;
       state.collections = action.payload;
     },
-    asyncFetchCollectionsStart: (state) => {
+    asyncFetchCollectionsStart: (
+      state,
+      action: PayloadAction<ClothesFetchParams>
+    ) => {
       state.isFetching = true;
     },
     fetchCollectionsFailed: (state) => {

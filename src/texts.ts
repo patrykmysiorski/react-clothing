@@ -6,8 +6,8 @@ const shopItems: StringIndex = {
   all: "all",
   hats: "hats",
   jackets: "jackets",
-  mens: "mens",
-  womens: "womens",
+  trousers: "trousers",
+  boots: "boots",
 };
 
 const helpItems: StringIndex = {

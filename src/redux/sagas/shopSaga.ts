@@ -9,13 +9,15 @@ import {
 } from "redux/shop/shopReducer";
 import { Collections } from "models/collections";
 import { addCloth, getAll } from "../../firebase/clothes/clothesCrud";
+import { ClothesFetchParams } from "../../components/shop/Shop";
 
-function* fetchCollections() {
+function* fetchCollections(fetchParams: ClothesFetchParams) {
   try {
     /*  const data: Collections = yield axios
-                                                    .get(GET_COLLECTIONS)
-                                                    .then((response) => response.data);*/
-    const data: Collections = yield getAll();
+                                                                                        .get(GET_COLLECTIONS)
+                                                                                        .then((response) => response.data);*/
+    // @ts-ignore
+    const data: Collections = yield getAll(fetchParams);
     yield put(fetchCollectionsSuccess(data));
   } catch {
     yield put(fetchCollectionsFailed());
@@ -36,10 +38,12 @@ function* watchClothPost() {
 }
 
 function* watchClothPostSuccess() {
+  // @ts-ignore
   yield takeLatest([postClothSuccess], fetchCollections);
 }
 
 function* watchCollectionsFetch() {
+  // @ts-ignore
   yield takeLatest([asyncFetchCollectionsStart], fetchCollections);
 }
 

@@ -24,4 +24,9 @@
       color: red;
     }
   }
+
+  .product:hover {
+    cursor: pointer;
+    opacity: 60%;
+  }
 }
