@@ -1,6 +1,5 @@
 // Form.js
 import getFirebase from "./firebase";
-import { useEffect, useState } from "react";
 
 const firebaseInstance = getFirebase();
 
@@ -23,12 +22,12 @@ export const signIn = async (email, password, onSuccess) => {
       const user = await firebaseInstance
         .auth()
         .signInWithEmailAndPassword(email, password);
-      console.log("user", user);
-      alert("Welcome back!");
+      alert("Successfuly logged in!");
       onSuccess();
     }
   } catch (error) {
     console.log("error", error);
+    alert("Wrong username or password");
   }
 };
 
@@ -42,24 +41,4 @@ export const resetPassword = async (email) => {
       var errorMessage = error.message;
       // ..
     });
-};
-
-export const usePrincipal = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-
-  // Listen to onAuthStateChanged
-  useEffect(() => {
-    const firebase = getFirebase();
-    if (firebase) {
-      firebase.auth().onAuthStateChanged((authUser) => {
-        if (authUser) {
-          setCurrentUser(authUser.email);
-        } else {
-          setCurrentUser(null);
-        }
-      });
-    }
-  }, []);
-
-  return { currentUser };
 };

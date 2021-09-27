@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -6,12 +6,14 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Button } from "@material-ui/core";
 
 interface OwnProps {
   onSuccessfulPayment: () => void;
 }
 
 const PaymentForm: React.FC<OwnProps> = ({ onSuccessfulPayment }) => {
+  const [agreesToEverything, setAgreesToEverything] = useState(false);
   const paymentSchema = Yup.object().shape({
     name: Yup.string()
       .required("Please, enter name")
@@ -31,10 +33,10 @@ const PaymentForm: React.FC<OwnProps> = ({ onSuccessfulPayment }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      cardNumber: "",
-      expiryDate: "",
-      cvv: "",
+      name: "Pan Teser",
+      cardNumber: "9857123477774539",
+      expiryDate: "05/25",
+      cvv: "777",
     },
     validationSchema: paymentSchema,
     onSubmit: (values) => {
@@ -109,13 +111,26 @@ const PaymentForm: React.FC<OwnProps> = ({ onSuccessfulPayment }) => {
           <Grid item xs={12}>
             <FormControlLabel
               control={
-                <Checkbox color="secondary" name="saveCard" value="yes" />
+                <Checkbox
+                  color="secondary"
+                  name="saveCard"
+                  value={agreesToEverything}
+                  onClick={() => setAgreesToEverything(!agreesToEverything)}
+                />
               }
-              label="Remember credit card details for next time"
+              label="I AGREE TO EVERYTHING"
             />
           </Grid>
         </Grid>
-        <button type="submit">TEST</button>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={!agreesToEverything}
+          fullWidth={true}
+        >
+          Buy :)
+        </Button>
       </form>
     </>
   );

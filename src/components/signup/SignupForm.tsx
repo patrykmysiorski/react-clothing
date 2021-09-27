@@ -71,7 +71,7 @@ const SignupForm: FunctionComponent<Props> = (props) => {
     validationSchema: SignupSchema,
     onSubmit: (values) => {
       auth(values.email, values.password).then(() => {
-        signIn(values.email, values.password).then(() => {
+        signIn(values.email, values.password, () => {
           push("/checkout");
         });
       });

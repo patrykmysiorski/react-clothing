@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import {
@@ -15,12 +14,27 @@ import {
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAppDispatch } from "../../redux/hooks";
+import { setAddress } from "../../redux/address/addressReducer";
 
 interface OwnProps {
   onSubmit: () => void;
+  initFormState: Address;
 }
 
-const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
+export interface Address {
+  firstName: string;
+  lastName: string;
+  address: string;
+  address2?: string;
+  city: string;
+  region: string;
+  zip: string;
+  country: string;
+  delivery: string;
+}
+
+const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
   const regions = [
     "Dolnośląskie",
     "Kujawsko-Pomorskie",
@@ -39,7 +53,6 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
     "Wielkopolskie",
     "Zachodniopomorskie",
   ];
-
   const AddressSchema = Yup.object().shape({
     firstName: Yup.string().required("Please, enter your name"),
     lastName: Yup.string().required("Please, enter your last name"),
@@ -52,21 +65,12 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
     country: Yup.string().required("Please, enter  country"),
     delivery: Yup.string().required("Please, select delivery option"),
   });
-
+  const dispatch = useAppDispatch();
   const formik = useFormik({
-    initialValues: {
-      delivery: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      address2: "",
-      city: "",
-      region: "",
-      zip: "",
-      country: "",
-    },
+    initialValues: initFormState,
     validationSchema: AddressSchema,
     onSubmit: (values) => {
+      dispatch(setAddress(values));
       onSubmit();
     },
   });
@@ -193,14 +197,14 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
               helperText={formik.touched.country && formik.errors.country}
             />
           </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
-              label="Use this address for payment details"
-            />
-          </Grid>
+          {/*<Grid item xs={12}>*/}
+          {/*  <FormControlLabel*/}
+          {/*    control={*/}
+          {/*      <Checkbox color="secondary" name="saveAddress" value="yes" />*/}
+          {/*    }*/}
+          {/*    label="Use this address for payment details"*/}
+          {/*  />*/}
+          {/*</Grid>*/}
         </Grid>
         <FormLabel component="legend">Delivery type</FormLabel>
         <RadioGroup
@@ -218,8 +222,13 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit }) => {
           />
         </RadioGroup>
 
-        <Button variant="contained" color="primary" type="submit">
-          CHECK
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          fullWidth={true}
+        >
+          Submit
         </Button>
       </form>
     </>

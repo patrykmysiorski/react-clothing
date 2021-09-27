@@ -33,6 +33,7 @@ const Cart: FunctionComponent = () => {
       </div>
       <Link to={"/checkout"}>
         <Button
+          disabled={products?.length === 0}
           text={"CHECK OUT"}
           className={styles.button}
           revertColors={true}

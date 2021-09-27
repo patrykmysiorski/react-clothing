@@ -3,7 +3,7 @@ import "./sidebar.scss";
 
 import Submenu from "./submenu/Submenu";
 import ExpandIcon from "./expandIcon/ExpandIcon";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { texts } from "texts";
 import useMenu from "hooks/useMenu";
 import { useAuth } from "../../hooks/useAuth";
@@ -12,6 +12,7 @@ const Sidebar: FunctionComponent = () => {
   const { isMenuOpen } = useMenu();
   const [isShopOpen, setIsShopOpen] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+  const { push } = useHistory();
   // @ts-ignore
   const { user, logout } = useAuth();
   return (
@@ -35,7 +36,14 @@ const Sidebar: FunctionComponent = () => {
           <>
             <div className={"list-item"}>Logged in as {user.email}</div>
             <div className={"list-item"}>
-              <span onClick={logout}>Click to Logout</span>
+              <span
+                onClick={() => {
+                  logout();
+                  push("/login");
+                }}
+              >
+                Click to Logout
+              </span>
             </div>
           </>
         )}

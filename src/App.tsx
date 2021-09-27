@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/header/Header";
 import "./app.scss";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Shop from "./components/shop/Shop";
 import Brand from "./components/brand/Brand";
 import Contact from "./components/contact/Contact";
@@ -41,7 +41,7 @@ const App = () => {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>(
-      {}
+    {}
   );
 
   const goToNextStep = () => {
@@ -59,102 +59,103 @@ const App = () => {
     //   setIsCartOpen(false);
     // }
   };
+  const { push } = useHistory();
 
   return (
-      <MuiThemeProvider theme={theme}>
-        <div className="app">
-          <MenuContext.Provider
-              value={{
-                isMenuOpen,
-                setIsMenuOpen,
-              }}
+    <MuiThemeProvider theme={theme}>
+      <div className="app">
+        <MenuContext.Provider
+          value={{
+            isMenuOpen,
+            setIsMenuOpen,
+          }}
+        >
+          <CartContext.Provider
+            value={{
+              isCartOpen,
+              setIsCartOpen,
+            }}
           >
-            <CartContext.Provider
-                value={{
-                  isCartOpen,
-                  setIsCartOpen,
-                }}
+            <Sidebar />
+            <Cart />
+            <div
+              onClick={hideSidebars}
+              className={`main-content ${
+                isMenuOpen ? "sidebar-menu-open" : ""
+              } ${isCartOpen ? "cart-open" : ""}`}
             >
-              <Sidebar/>
-              <Cart/>
-              <div
-                  onClick={hideSidebars}
-                  className={`main-content ${
-                      isMenuOpen ? "sidebar-menu-open" : ""
-                  } ${isCartOpen ? "cart-open" : ""}`}
-              >
-                <Header/>
-                <Switch>
-                  <Route path="/shop">
-                    <Shop/>
-                  </Route>
-                  <Route path="/brand">
-                    <Brand/>
-                  </Route>
-                  <Route path="/contact">
-                    <Contact/>
-                  </Route>
-                  <Route path="/help">
-                    <Help/>
-                  </Route>
-                  {/*<PrivateRoute exact path="/">*/}
-                  {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
-                  {/*</PrivateRoute>*/}
-                  <Route path="/checkout">
-                    <CheckoutStepperContext.Provider
-                        value={{
-                          setActiveStep,
-                          activeStep,
-                          goToNextStep,
-                          completed,
-                          setCompleted,
-                        }}
-                    >
-                      <Checkout/>
-                    </CheckoutStepperContext.Provider>
-                  </Route>
-                  <Route path="/login">
-                    <LoginForm
-                        onSubmitSuccess={() => {
-                          alert("loggedi n");
-                        }}
-                    />
-                  </Route>
-                  <Route path="/signup">
-                    <SignupForm/>
-                  </Route>
-                  <Route path="/">
-                    <MainPage/>
-                  </Route>
-                </Switch>
-              </div>
-            </CartContext.Provider>
-          </MenuContext.Provider>
-        </div>
-      </MuiThemeProvider>
+              <Header />
+              <Switch>
+                <Route path="/shop">
+                  <Shop />
+                </Route>
+                <Route path="/brand">
+                  <Brand />
+                </Route>
+                <Route path="/contact">
+                  <Contact />
+                </Route>
+                <Route path="/help">
+                  <Help />
+                </Route>
+                {/*<PrivateRoute exact path="/">*/}
+                {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
+                {/*</PrivateRoute>*/}
+                <Route path="/checkout">
+                  <CheckoutStepperContext.Provider
+                    value={{
+                      setActiveStep,
+                      activeStep,
+                      goToNextStep,
+                      completed,
+                      setCompleted,
+                    }}
+                  >
+                    <Checkout />
+                  </CheckoutStepperContext.Provider>
+                </Route>
+                <Route path="/login">
+                  <LoginForm
+                    onSubmitSuccess={() => {
+                      push("/shop");
+                    }}
+                  />
+                </Route>
+                <Route path="/signup">
+                  <SignupForm />
+                </Route>
+                <Route path="/">
+                  <MainPage />
+                </Route>
+              </Switch>
+            </div>
+          </CartContext.Provider>
+        </MenuContext.Provider>
+      </div>
+    </MuiThemeProvider>
   );
 };
 
 // @ts-ignore
-const PrivateRoute = ({children, ...rest}) => {
+const PrivateRoute = ({ children, ...rest }) => {
   // @ts-ignore
-  const {user} = useAuth();
+  const { user } = useAuth();
   return (
-      <Route
-          {...rest}
-          render={() => (user ? children : <Redirect to={"/login"}/>)}
-      />
+    <Route
+      {...rest}
+      render={() => (user ? children : <Redirect to={"/login"} />)}
+    />
   );
 };
 // @ts-ignore
-const PrincipalRestrictedRoute = ({children, ...rest}) => {
+const PrincipalRestrictedRoute = ({ children, ...rest }) => {
   // @ts-ignore
-  const {user} = useAuth();
+  const { user } = useAuth();
   return (
-      <Route
-          {...rest}
-          render={() => (user ? children : <Redirect to={"/logout"}/>)}
-      />
+    <Route
+      {...rest}
+      render={() => (user ? children : <Redirect to={"/logout"} />)}
+    />
   );
 };
 

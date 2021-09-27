@@ -21,6 +21,8 @@ import { usePaginator } from "../../hooks/usePaginator";
 import { Button, Grid } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { ClothType } from "../../constants/clothType";
+import { asyncFetchOrdersStart } from "../../redux/orders/ordersReducer";
+import { useAuth } from "../../hooks/useAuth";
 
 export interface ClothesFetchParams {
   type: string;
@@ -52,6 +54,13 @@ const Shop: FunctionComponent = () => {
       })
     );
   };
+  // @ts-ignore
+  const { user } = useAuth();
+
+  useEffect(() => {
+    dispatch(asyncFetchOrdersStart("dupa"));
+    dispatch(asyncFetchOrdersStart(user?.uid));
+  }, []);
 
   useEffect(() => {
     getClothes();
@@ -187,7 +196,9 @@ interface PageLimiterProps {
 }
 
 const PageLimiter = ({ onAll, onMore }: PageLimiterProps) => (
-  <Button onClick={onMore}> Show more clothes </Button>
+  <Button onClick={onMore} fullWidth={true}>
+    Show more clothes{" "}
+  </Button>
 );
 
 const clothTypeResolver = (pathname: string) => {

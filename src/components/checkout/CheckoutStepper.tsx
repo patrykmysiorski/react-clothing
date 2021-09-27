@@ -11,16 +11,28 @@ import CheckoutFirstStep from "./steps/CheckoutFirstStep";
 import CheckoutThirdStep from "./steps/CheckoutThirdStep";
 import { Container } from "@material-ui/core";
 import { useAuth } from "../../hooks/useAuth";
+import { addressSelector } from "../../redux/address/addressSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector } from "../../redux/cart/cartSelectors";
+import { useHistory } from "react-router-dom";
+import { asyncPostOrderStart } from "../../redux/orders/ordersReducer";
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
 const CheckoutStepper: FunctionComponent<Props> = (props) => {
-  const { goToNextStep } = useCheckoutStepper();
+  const { goToNextStep, setActiveStep } = useCheckoutStepper();
+  let dispatch = useDispatch();
+  const { push } = useHistory();
   // @ts-ignore
   const { user } = useAuth();
+  let address = useSelector(addressSelector);
+  let products = useSelector(cartSelector);
   const getStepContent = (step: number) => {
+    if (products?.length === 0) {
+      push("/shop");
+    }
     switch (step) {
       case 0:
         if (user) {
@@ -28,11 +40,22 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
         }
         return <CheckoutFirstStep onFinish={goToNextStep} />;
       case 1:
+        if (!user) {
+          setActiveStep(0);
+        }
         return <CheckoutSecondStep onFinish={goToNextStep} />;
       case 2:
+        if (!user) {
+          setActiveStep(0);
+        }
         return (
           <CheckoutThirdStep
-            onFinish={() => alert("I should go to summary after payment :)")}
+            onFinish={() => {
+              dispatch(
+                asyncPostOrderStart({ uid: user.uid, address, products })
+              );
+              alert("I should go to summary :0");
+            }}
           />
         );
       default:

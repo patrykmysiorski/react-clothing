@@ -140,7 +140,6 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              {/**/}
               <RouterLink to={"/reset-password"}>
                 <Link variant="body2">Forgot password?</Link>
               </RouterLink>

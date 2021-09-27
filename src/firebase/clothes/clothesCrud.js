@@ -5,7 +5,7 @@ getFirebase();
 var clothesRef = firebase.firestore().collection("/clothes");
 let paginationPointer = undefined;
 
-export const getAll = async ({
+export const getAllProducts = async ({
   payload = {
     type: "all",
     gender: "Uni",
@@ -15,7 +15,6 @@ export const getAll = async ({
     filter: "",
   },
 }) => {
-  console.log(payload);
   var clothes = [];
 
   const first = clothesRef.limit(1);
@@ -30,7 +29,6 @@ export const getAll = async ({
   if (payload.type !== "all") {
     clothesQuery = clothesQuery.where("type", "==", payload.type);
   }
-  console.log(payload);
   return await clothesQuery
     .limit(payload.limit)
     .orderBy(payload.sortBy, payload.orderBy)

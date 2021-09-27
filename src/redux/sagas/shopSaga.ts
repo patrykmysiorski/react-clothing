@@ -8,17 +8,17 @@ import {
   postClothSuccess,
 } from "redux/shop/shopReducer";
 import { Collections } from "models/collections";
-import { addCloth, getAll } from "../../firebase/clothes/clothesCrud";
+import { addCloth, getAllProducts } from "../../firebase/clothes/clothesCrud";
 import { ClothesFetchParams } from "../../components/shop/Shop";
 
 function* fetchCollections(fetchParams: ClothesFetchParams) {
   try {
     /*  const data: Collections = yield axios
-                                                                                            .get(GET_COLLECTIONS)
-    
-                                                                                            .then((response) => response.data);*/
+                                                                                                .get(GET_COLLECTIONS)
+
+                                                                                                .then((response) => response.data);*/
     // @ts-ignore
-    const data: Collections = yield getAll(fetchParams);
+    const data: Collections = yield getAllProducts(fetchParams);
     yield put(fetchCollectionsSuccess(data));
   } catch {
     yield put(fetchCollectionsFailed());
