@@ -3,13 +3,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import {
-  Button,
-  CssBaseline,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
+import { Button, CssBaseline, MenuItem } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { useAppDispatch } from "../../redux/hooks";
 import { asyncPostClothStart } from "../../redux/shop/shopReducer";
@@ -110,33 +104,41 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <InputLabel id="demo-simple-select-label">Cloth type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+            <TextField
+              required
+              id="type"
+              name="type"
+              label="Type"
+              select
               value={formik.values.type}
               onChange={formik.handleChange}
+              error={formik.touched.type && Boolean(formik.errors.type)}
+              helperText={formik.touched.type && formik.errors.type}
             >
-              <MenuItem value={10}>{ClothType.HAT}</MenuItem>
-              <MenuItem value={20}>{ClothType.JACKET}</MenuItem>
-              <MenuItem value={30}>{ClothType.TROUSERS}</MenuItem>
-              <MenuItem value={40}>{ClothType.BOOTS}</MenuItem>
-            </Select>
-            {formik.values.type}
+              <MenuItem value={ClothType.HAT}>{ClothType.HAT}</MenuItem>
+              <MenuItem value={ClothType.JACKET}>{ClothType.JACKET}</MenuItem>
+              <MenuItem value={ClothType.TROUSERS}>
+                {ClothType.TROUSERS}
+              </MenuItem>
+              <MenuItem value={ClothType.BOOTS}>{ClothType.BOOTS}</MenuItem>
+            </TextField>
           </Grid>
           <Grid item>
-            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+            <TextField
+              required
+              id="gender"
+              name="gender"
+              label="Gender"
+              select
               value={formik.values.gender}
               onChange={formik.handleChange}
+              error={formik.touched.gender && Boolean(formik.errors.gender)}
+              helperText={formik.touched.gender && formik.errors.gender}
             >
-              <MenuItem value={10}>{Gender.MALE}</MenuItem>
-              <MenuItem value={20}>{Gender.FEMALE}</MenuItem>
-              <MenuItem value={30}>{Gender.UNI}</MenuItem>
-            </Select>
-            {formik.values.gender}
+              <MenuItem value={Gender.MALE}>{Gender.MALE}</MenuItem>
+              <MenuItem value={Gender.FEMALE}>{Gender.FEMALE}</MenuItem>
+              <MenuItem value={Gender.UNI}>{Gender.UNI}</MenuItem>
+            </TextField>
           </Grid>
         </Grid>
         <Button variant="contained" color="primary" type="submit">

@@ -1,6 +1,6 @@
 export enum ClothType {
   JACKET = "Jacket",
-  BOOTS = "Boot",
-  TROUSERS = "Trouser",
+  BOOTS = "Boots",
+  TROUSERS = "Trousers",
   HAT = "Hat",
 }
