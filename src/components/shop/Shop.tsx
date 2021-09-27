@@ -14,7 +14,7 @@ import {
   isShopFetchingSelector,
 } from "redux/shop/shopSelectors";
 import { usePath } from "hooks/usePath";
-import PortalModal from "../modal/PortalModal";
+import NewProductModal from "../modal/NewProductModal";
 import { SortType } from "../../constants/sortType";
 import { OrderType } from "../../constants/orderType";
 import { usePaginator } from "../../hooks/usePaginator";
@@ -63,7 +63,7 @@ const Shop: FunctionComponent = () => {
     <SubPageContainer>
       <div className="shop">
         <SubNavigation items={tabsNames} />
-        <PortalModal />
+        <NewProductModal onAdd={getClothes} />
         {isLoading && <Spinner />}
         <Grid container>
           <Grid item xs={2}>
@@ -120,14 +120,13 @@ const FilterInput = ({ setFilter, defaultValue }: FilterProps) => {
         required
         id="filter"
         name="filter"
-        label="Filter"
+        label="Filter by name"
         value={defaultValue}
         onChange={(event) => setFilter(event.target.value)}
         onBlur={(event) => setFilter(defaultValue)}
       />
 
       <Button onClick={() => setFilter("")}>
-        {" "}
         <span className={`m-top-2 material-icons`}>close</span>{" "}
       </Button>
     </>
@@ -177,14 +176,8 @@ const OrderBySetter = ({
   setSortField,
 }: OrderBySetterProps) => (
   <Grid container spacing={3}>
-    <Grid item>
-      Sort by
-      {ClickableButtons(sortFields, setSortField)}
-    </Grid>
-    <Grid item>
-      Order by
-      {ClickableButtons(orderFields, setOrder)}
-    </Grid>
+    <Grid item>{ClickableButtons(sortFields, setSortField)}</Grid>
+    <Grid item>{ClickableButtons(orderFields, setOrder)}</Grid>
   </Grid>
 );
 
@@ -194,7 +187,7 @@ interface PageLimiterProps {
 }
 
 const PageLimiter = ({ onAll, onMore }: PageLimiterProps) => (
-  <Button onClick={onMore}> Show 4 more clothes </Button>
+  <Button onClick={onMore}> Show more clothes </Button>
 );
 
 const clothTypeResolver = (pathname: string) => {

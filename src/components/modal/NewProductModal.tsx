@@ -2,11 +2,13 @@ import React, { FunctionComponent, useState } from "react";
 import { Card, IconButton, Modal } from "@material-ui/core";
 import NewProductForm from "../new-product-form/NewProductForm";
 
-interface OwnProps {}
+interface OwnProps {
+  onAdd: () => void;
+}
 
 type Props = OwnProps;
 
-const PortalModal: FunctionComponent<Props> = (props) => {
+const NewProductModal: FunctionComponent<Props> = (props) => {
   const [isOpened, setOpened] = useState(false);
   return (
     <>
@@ -19,11 +21,11 @@ const PortalModal: FunctionComponent<Props> = (props) => {
       </IconButton>
       <Modal open={isOpened} onClose={() => setOpened(false)}>
         <Card>
-          <NewProductForm />
+          <NewProductForm onAdd={props.onAdd} />
         </Card>
       </Modal>
     </>
   );
 };
 
-export default PortalModal;
+export default NewProductModal;

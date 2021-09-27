@@ -10,7 +10,9 @@ import { asyncPostClothStart } from "../../redux/shop/shopReducer";
 import { Gender } from "../../constants/gender";
 import { ClothType } from "../../constants/clothType";
 
-interface OwnProps {}
+interface OwnProps {
+  onAdd: () => void;
+}
 
 type Props = OwnProps;
 
@@ -44,6 +46,7 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
           author: "Admin",
         })
       );
+      props.onAdd();
     },
   });
 

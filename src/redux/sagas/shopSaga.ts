@@ -14,8 +14,9 @@ import { ClothesFetchParams } from "../../components/shop/Shop";
 function* fetchCollections(fetchParams: ClothesFetchParams) {
   try {
     /*  const data: Collections = yield axios
-                                                                                        .get(GET_COLLECTIONS)
-                                                                                        .then((response) => response.data);*/
+                                                                                            .get(GET_COLLECTIONS)
+    
+                                                                                            .then((response) => response.data);*/
     // @ts-ignore
     const data: Collections = yield getAll(fetchParams);
     yield put(fetchCollectionsSuccess(data));
