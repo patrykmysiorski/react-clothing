@@ -19,6 +19,7 @@ export const getOrders = async (uid) => {
         var id = childSnapshot.id;
         var data = childSnapshot;
         orders.push({
+          orderId: id,
           address: data.get("address"),
           products: data.get("products"),
           uid: data.get("uid"),

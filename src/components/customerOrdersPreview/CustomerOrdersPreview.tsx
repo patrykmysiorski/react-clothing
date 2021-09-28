@@ -23,7 +23,6 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
 
   return (
     <>
-      elo
       {orders.map((order, key) => (
         <Button key={key}>Dupa jasia {order.uid}</Button>
       ))}

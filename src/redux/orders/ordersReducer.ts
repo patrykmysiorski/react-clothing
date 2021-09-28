@@ -7,6 +7,7 @@ export interface Order {
   products: Product[];
   address: Address;
   uid: any;
+  orderId?: any;
 }
 
 export interface OrderState {
