@@ -26,7 +26,7 @@ const NewProductModal: FunctionComponent<Props> = (props) => {
       </Button>
       <Modal open={isOpened} onClose={() => setOpened(false)}>
         <Card>
-          <NewProductForm onAdd={props.onAdd} />
+          <NewProductForm onAdd={props.onAdd} setOpened={setOpened} />
         </Card>
       </Modal>
     </>
