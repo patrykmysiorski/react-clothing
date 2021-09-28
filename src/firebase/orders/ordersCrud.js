@@ -23,6 +23,7 @@ export const getOrders = async (uid) => {
           address: data.get("address"),
           products: data.get("products"),
           uid: data.get("uid"),
+          date: data.get("date"),
         });
       });
     })

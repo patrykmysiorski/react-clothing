@@ -8,6 +8,7 @@ export interface Order {
   address: Address;
   uid: any;
   orderId?: any;
+  date: string;
 }
 
 export interface OrderState {

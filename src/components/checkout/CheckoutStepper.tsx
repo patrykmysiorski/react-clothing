@@ -53,7 +53,12 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
             onFinish={() => {
               console.log("WTF");
               dispatch(
-                asyncPostOrderStart({ uid: user.uid, address, products })
+                asyncPostOrderStart({
+                  uid: user.uid,
+                  address,
+                  products,
+                  date: new Date().toISOString(),
+                })
               );
             }}
           />
