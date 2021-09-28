@@ -18,7 +18,7 @@ import NewProductModal from "../modal/NewProductModal";
 import { SortType } from "../../constants/sortType";
 import { OrderType } from "../../constants/orderType";
 import { usePaginator } from "../../hooks/usePaginator";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Modal } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { ClothType } from "../../constants/clothType";
 import { asyncFetchOrdersStart } from "../../redux/orders/ordersReducer";
@@ -70,49 +70,55 @@ const Shop: FunctionComponent = () => {
 
   return (
     <SubPageContainer>
-      <div className="shop">
-        <SubNavigation items={tabsNames} />
-        <NewProductModal onAdd={getClothes} />
-        {isLoading && <Spinner />}
-        <Grid container>
-          <Grid item xs={2}>
-            <Grid container spacing={3}>
-              <Grid item>
-                <OrderBySetter
-                  setOrder={setOrderBy}
-                  setSortField={setSortBy}
-                  sortFields={Object.values(SortType)}
-                  orderFields={Object.values(OrderType)}
-                />
-              </Grid>
-              <Grid item>
-                <FilterInput setFilter={setFilter} defaultValue={filter} />
+      <>
+        <Modal open={isLoading}>
+          <div className={"spinner-padding"}>
+            <Spinner />
+          </div>
+        </Modal>
+        <div className="shop">
+          <SubNavigation items={tabsNames} />
+          <NewProductModal onAdd={getClothes} />
+          <Grid container>
+            <Grid item xs={2}>
+              <Grid container spacing={3}>
+                <Grid item>
+                  <OrderBySetter
+                    setOrder={setOrderBy}
+                    setSortField={setSortBy}
+                    sortFields={Object.values(SortType)}
+                    orderFields={Object.values(OrderType)}
+                  />
+                </Grid>
+                <Grid item>
+                  <FilterInput setFilter={setFilter} defaultValue={filter} />
+                </Grid>
               </Grid>
             </Grid>
+            <Grid item xs={10}>
+              <Collection
+                collection={
+                  filter === ""
+                    ? collection
+                    : collection.filter((cloth) =>
+                        cloth.name
+                          .toLocaleLowerCase()
+                          .includes(filter.toLocaleLowerCase())
+                      )
+                }
+              />
+              <PageLimiter
+                onAll={() => {
+                  showAll();
+                }}
+                onMore={() => {
+                  increaseBy(4);
+                }}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={10}>
-            <Collection
-              collection={
-                filter === ""
-                  ? collection
-                  : collection.filter((cloth) =>
-                      cloth.name
-                        .toLocaleLowerCase()
-                        .includes(filter.toLocaleLowerCase())
-                    )
-              }
-            />
-            <PageLimiter
-              onAll={() => {
-                showAll();
-              }}
-              onMore={() => {
-                increaseBy(4);
-              }}
-            />
-          </Grid>
-        </Grid>
-      </div>
+        </div>
+      </>
     </SubPageContainer>
   );
 };
