@@ -160,7 +160,11 @@ const HorizontalNonLinearStepper: React.FC<StepperProps> = ({
 
   return (
     <div className={classes.root}>
-      <Stepper nonLinear activeStep={activeStep}>
+      <Stepper
+        style={{ backgroundColor: "transparent" }}
+        nonLinear
+        activeStep={activeStep}
+      >
         {steps.map((label, index) => (
           <Step key={label}>
             <StepButton
