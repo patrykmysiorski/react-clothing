@@ -87,20 +87,24 @@ const Shop: FunctionComponent = () => {
             />
             <FilterInput setFilter={setFilter} defaultValue={filter} />
           </div>
-          <div className={"new"}>
-            <NewProductModal onAdd={getClothes} />
+          {user && (
+            <div className={"new"}>
+              <NewProductModal onAdd={getClothes} />
+            </div>
+          )}
+          <div className={"m-top-3"}>
+            <Collection
+              collection={
+                filter === ""
+                  ? collection
+                  : collection.filter((cloth) =>
+                      cloth.name
+                        .toLocaleLowerCase()
+                        .includes(filter.toLocaleLowerCase())
+                    )
+              }
+            />
           </div>
-          <Collection
-            collection={
-              filter === ""
-                ? collection
-                : collection.filter((cloth) =>
-                    cloth.name
-                      .toLocaleLowerCase()
-                      .includes(filter.toLocaleLowerCase())
-                  )
-            }
-          />
           <Grid container>
             <Grid item xs={12}>
               <PageLimiter
