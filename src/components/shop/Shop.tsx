@@ -102,7 +102,7 @@ const Shop: FunctionComponent = () => {
             }
           />
           <Grid container>
-            <Grid item xs={10}>
+            <Grid item xs={12}>
               <PageLimiter
                 onAll={() => {
                   showAll();
