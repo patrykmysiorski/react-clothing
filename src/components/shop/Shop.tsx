@@ -58,7 +58,6 @@ const Shop: FunctionComponent = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    dispatch(asyncFetchOrdersStart("dupa"));
     dispatch(asyncFetchOrdersStart(user?.uid));
   }, []);
 
@@ -76,37 +75,34 @@ const Shop: FunctionComponent = () => {
             <Spinner />
           </div>
         </Modal>
+
         <div className="shop">
           <SubNavigation items={tabsNames} />
-          <NewProductModal onAdd={getClothes} />
+          <div className={"filters"}>
+            <OrderBySetter
+              setOrder={setOrderBy}
+              setSortField={setSortBy}
+              sortFields={Object.values(SortType)}
+              orderFields={Object.values(OrderType)}
+            />
+            <FilterInput setFilter={setFilter} defaultValue={filter} />
+          </div>
+          <div className={"new"}>
+            <NewProductModal onAdd={getClothes} />
+          </div>
+          <Collection
+            collection={
+              filter === ""
+                ? collection
+                : collection.filter((cloth) =>
+                    cloth.name
+                      .toLocaleLowerCase()
+                      .includes(filter.toLocaleLowerCase())
+                  )
+            }
+          />
           <Grid container>
-            <Grid item xs={2}>
-              <Grid container spacing={3}>
-                <Grid item>
-                  <OrderBySetter
-                    setOrder={setOrderBy}
-                    setSortField={setSortBy}
-                    sortFields={Object.values(SortType)}
-                    orderFields={Object.values(OrderType)}
-                  />
-                </Grid>
-                <Grid item>
-                  <FilterInput setFilter={setFilter} defaultValue={filter} />
-                </Grid>
-              </Grid>
-            </Grid>
             <Grid item xs={10}>
-              <Collection
-                collection={
-                  filter === ""
-                    ? collection
-                    : collection.filter((cloth) =>
-                        cloth.name
-                          .toLocaleLowerCase()
-                          .includes(filter.toLocaleLowerCase())
-                      )
-                }
-              />
               <PageLimiter
                 onAll={() => {
                   showAll();
@@ -130,7 +126,7 @@ interface FilterProps {
 
 const FilterInput = ({ setFilter, defaultValue }: FilterProps) => {
   return (
-    <>
+    <div className={"elo"}>
       <TextField
         required
         id="filter"
@@ -140,11 +136,10 @@ const FilterInput = ({ setFilter, defaultValue }: FilterProps) => {
         onChange={(event) => setFilter(event.target.value)}
         onBlur={(event) => setFilter(defaultValue)}
       />
-
-      <Button onClick={() => setFilter("")}>
-        <span className={`m-top-2 material-icons`}>close</span>{" "}
-      </Button>
-    </>
+      <span onClick={() => setFilter("")} className={`material-icons`}>
+        close
+      </span>
+    </div>
   );
 };
 
@@ -190,10 +185,10 @@ const OrderBySetter = ({
   sortFields,
   setSortField,
 }: OrderBySetterProps) => (
-  <Grid container spacing={3}>
-    <Grid item>{ClickableButtons(sortFields, setSortField)}</Grid>
-    <Grid item>{ClickableButtons(orderFields, setOrder)}</Grid>
-  </Grid>
+  <div className={"filter-buttons"}>
+    <div>{ClickableButtons(sortFields, setSortField)}</div>
+    <div>{ClickableButtons(orderFields, setOrder)}</div>
+  </div>
 );
 
 interface PageLimiterProps {

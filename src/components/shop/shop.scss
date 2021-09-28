@@ -6,3 +6,28 @@
 .spinner-padding {
   padding: 80px;
 }
+
+.filters {
+  display: grid;
+  grid-template-columns: 400px 200px;
+  align-items: end;
+  justify-content: center;
+  width: 100%;
+}
+
+.filter-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+}
+
+.elo {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.new {
+  width: 200px;
+  margin: 20px auto 0;
+  text-align: center;
+}

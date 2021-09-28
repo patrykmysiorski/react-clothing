@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { Card, IconButton, Modal } from "@material-ui/core";
+import { Button, Card, Modal } from "@material-ui/core";
 import NewProductForm from "../new-product-form/NewProductForm";
 
 interface OwnProps {
@@ -12,13 +12,18 @@ const NewProductModal: FunctionComponent<Props> = (props) => {
   const [isOpened, setOpened] = useState(false);
   return (
     <>
-      <IconButton
+      <Button
         onClick={() => {
           setOpened(true);
         }}
+        style={{
+          backgroundColor: "#f3ac40",
+          color: "#FFFFFF",
+          padding: "10px",
+        }}
       >
         Add new ciuch
-      </IconButton>
+      </Button>
       <Modal open={isOpened} onClose={() => setOpened(false)}>
         <Card>
           <NewProductForm onAdd={props.onAdd} />
