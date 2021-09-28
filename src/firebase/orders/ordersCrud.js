@@ -20,14 +20,8 @@ export const getOrders = async (uid) => {
         var data = childSnapshot;
         orders.push({
           address: data.get("address"),
-          address2: data.get("address2"),
-          city: data.get("city"),
-          country: data.get("country"),
-          delivery: data.get("delivery"),
-          firstName: data.get("firstName"),
-          lastName: data.get("lastName"),
-          region: data.get("region"),
-          zip: data.get("zip"),
+          products: data.get("products"),
+          uid: data.get("uid"),
         });
       });
     })

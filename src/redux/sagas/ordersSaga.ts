@@ -22,7 +22,7 @@ function* fetchOrders({ payload: uid }: PayloadAction<string>) {
 }
 
 // @ts-ignore
-function* laPostOrder(payload: Order) {
+function* laPostOrder({ payload }: PayloadAction<Order>) {
   try {
     yield postOrder(payload);
     yield put(postOrderSuccess());

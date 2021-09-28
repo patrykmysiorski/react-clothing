@@ -18,6 +18,7 @@ import { createTheme, MuiThemeProvider } from "@material-ui/core";
 import { green, orange } from "@material-ui/core/colors";
 import SignupForm from "./components/signup/SignupForm";
 import { useAuth } from "./hooks/useAuth";
+import CustomerOrdersPreview from "./components/customerOrdersPreview/CustomerOrdersPreview";
 
 const theme = createTheme({
   palette: {
@@ -98,6 +99,9 @@ const App = () => {
                 <Route path="/help">
                   <Help />
                 </Route>
+                <PrivateRoute exact path={"/orders"}>
+                  <CustomerOrdersPreview />
+                </PrivateRoute>
                 {/*<PrivateRoute exact path="/">*/}
                 {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
                 {/*</PrivateRoute>*/}

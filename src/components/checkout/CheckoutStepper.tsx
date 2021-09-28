@@ -51,10 +51,10 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
         return (
           <CheckoutThirdStep
             onFinish={() => {
+              console.log("WTF");
               dispatch(
                 asyncPostOrderStart({ uid: user.uid, address, products })
               );
-              alert("I should go to summary :0");
             }}
           />
         );
