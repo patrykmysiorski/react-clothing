@@ -24,8 +24,10 @@ const CheckoutSecondStep: FunctionComponent<Props> = ({ onFinish }) => {
   const [state, setState] = useState<Address | undefined>(undefined);
 
   useEffect(() => {
-    dispatch(asyncFetchOrdersStart(user.uid));
-  }, [dispatch, user.uid]);
+    if (user) {
+      dispatch(asyncFetchOrdersStart(user.uid));
+    }
+  }, [dispatch, user]);
 
   const { orders } = useSelector(orderSelector);
   useEffect(() => {
