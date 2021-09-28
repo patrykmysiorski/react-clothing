@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Button } from "@material-ui/core";
 import { useOrders } from "../../hooks/useOrders";
+import OrderPreview from "./orderPreview/OrderPreview";
 
 interface OwnProps {}
 
@@ -11,7 +11,7 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
   return (
     <>
       {orders.map((order, key) => (
-        <Button key={key}>Dupa jasia {order.uid}</Button>
+        <OrderPreview order={order} key={key} />
       ))}
     </>
   );
