@@ -46,6 +46,7 @@ export const getAllProducts = async ({
           price: data.get("price"),
           gender: data.get("gender"),
           type: data.get("type"),
+          author: data.get("author"),
         });
       });
     })
@@ -82,4 +83,13 @@ export const addCloth = ({
     .catch(function (error) {
       alert("Error adding Cloth");
     });
+};
+
+export const deleteCloth = ({ userId, clothId }) => {
+  console.log(clothId);
+  firebase
+    .auth()
+    .currentUser.getIdTokenResult()
+    .then((idTokenResult) => console.log(idTokenResult));
+  clothesRef.doc(clothId).delete();
 };

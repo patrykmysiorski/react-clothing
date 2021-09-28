@@ -6,17 +6,24 @@ import {
   fetchCollectionsSuccess,
   postClothFailed,
   postClothSuccess,
+  removeClothFailed,
+  removeClothStart,
+  removeClothSuccess,
 } from "redux/shop/shopReducer";
 import { Collections } from "models/collections";
-import { addCloth, getAllProducts } from "../../firebase/clothes/clothesCrud";
+import {
+  addCloth,
+  deleteCloth,
+  getAllProducts,
+} from "../../firebase/clothes/clothesCrud";
 import { ClothesFetchParams } from "../../components/shop/Shop";
 
 function* fetchCollections(fetchParams: ClothesFetchParams) {
   try {
     /*  const data: Collections = yield axios
-                                                                                                .get(GET_COLLECTIONS)
-
-                                                                                                .then((response) => response.data);*/
+                                                                                                                    .get(GET_COLLECTIONS)
+                    
+                                                                                                                    .then((response) => response.data);*/
     // @ts-ignore
     const data: Collections = yield getAllProducts(fetchParams);
     yield put(fetchCollectionsSuccess(data));
@@ -43,6 +50,24 @@ function* watchClothPostSuccess() {
   yield takeLatest([postClothSuccess], fetchCollections);
 }
 
+function* removeCloth(payload: any) {
+  try {
+    yield deleteCloth(payload.payload);
+    yield put(removeClothSuccess());
+  } catch {
+    yield put(removeClothFailed());
+  }
+}
+
+function* watchClothDelete() {
+  yield takeLatest([removeClothStart], removeCloth);
+}
+
+function* watchClothDeleteSuccess() {
+  // @ts-ignore
+  yield takeLatest([removeClothSuccess], fetchCollections);
+}
+
 function* watchCollectionsFetch() {
   // @ts-ignore
   yield takeLatest([asyncFetchCollectionsStart], fetchCollections);
@@ -53,5 +78,7 @@ export default function* shopSaga() {
     watchCollectionsFetch(),
     watchClothPost(),
     watchClothPostSuccess(),
+    watchClothDelete(),
+    watchClothDeleteSuccess(),
   ]);
 }

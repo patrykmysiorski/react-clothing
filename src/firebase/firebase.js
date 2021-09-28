@@ -34,10 +34,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// export const adminApp = admin.initializeApp();
 const analytics = getAnalytics(app);
-
 let instance;
-
 export default function getFirebase() {
   if (typeof window !== "undefined") {
     if (instance) return instance;
