@@ -1,14 +1,16 @@
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import * as Yup from "yup";
-import {useFormik} from "formik";
+import { useFormik } from "formik";
 import Typography from "@material-ui/core/Typography";
-import {Button, CssBaseline, MenuItem} from "@material-ui/core";
+import { Button, CssBaseline, MenuItem } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import {useAppDispatch} from "../../redux/hooks";
-import {asyncPostClothStart} from "../../redux/shop/shopReducer";
-import {Gender} from "../../constants/gender";
-import {ClothType} from "../../constants/clothType";
+import { useAppDispatch } from "../../redux/hooks";
+import { asyncPostClothStart } from "../../redux/shop/shopReducer";
+import { Gender } from "../../constants/gender";
+import { ClothType } from "../../constants/clothType";
 import styles from "./newProductForm.module.scss";
+import { useAuth } from "hooks/useAuth";
+import { useSnackbarSuccess } from "hooks/useSnackbarSuccess";
 
 interface OwnProps {
   onAdd: () => void;
@@ -19,6 +21,8 @@ type Props = OwnProps;
 
 const NewProductForm: FunctionComponent<Props> = (props) => {
   const dispatch = useAppDispatch();
+  // @ts-ignore
+  const { user } = useAuth();
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Please, enter your name"),
@@ -28,6 +32,7 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
     gender: Yup.string().required("Please, enter gender"),
     type: Yup.string().required("Please, enter type"),
   });
+  const { enqueueSuccessSnackbar } = useSnackbarSuccess();
 
   const formik = useFormik({
     initialValues: {
@@ -44,9 +49,10 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
         asyncPostClothStart({
           ...values,
           date: new Date().toISOString(),
-          author: "Admin",
+          author: user.uid,
         })
       );
+      enqueueSuccessSnackbar("Cloth added");
       props.onAdd();
     },
   });
@@ -74,12 +80,19 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
             required
             id="imageUrl"
             name="imageUrl"
-            label="Image url"
+            label="Image url (PLEASE PROVIDE A LEGIT URL TO A PICTURE)"
             value={formik.values.imageUrl}
             onChange={formik.handleChange}
             error={formik.touched.imageUrl && Boolean(formik.errors.imageUrl)}
             helperText={formik.touched.imageUrl && formik.errors.imageUrl}
           />
+          <Button
+            onClick={() => {
+              formik.setFieldValue("imageUrl", "https://picsum.photos/600/600");
+            }}
+          >
+            or.... click me to generate random image
+          </Button>
 
           <TextField
             required
@@ -97,11 +110,16 @@ const NewProductForm: FunctionComponent<Props> = (props) => {
             id="currency"
             name="currency"
             label="Currency"
+            select
             value={formik.values.currency}
             onChange={formik.handleChange}
             error={formik.touched.currency && Boolean(formik.errors.currency)}
             helperText={formik.touched.currency && formik.errors.currency}
-          />
+          >
+            <MenuItem value={"$"}>$</MenuItem>
+            <MenuItem value={"PLN"}>PLN</MenuItem>
+            <MenuItem value={"EURO"}>EURO</MenuItem>
+          </TextField>
 
           <TextField
             required

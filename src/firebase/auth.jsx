@@ -12,7 +12,6 @@ export const auth = async (email, password) => {
     }
   } catch (error) {
     console.log("error", error);
-    alert(error.message);
   }
 };
 
@@ -22,12 +21,10 @@ export const signIn = async (email, password, onSuccess) => {
       const user = await firebaseInstance
         .auth()
         .signInWithEmailAndPassword(email, password);
-      alert("Successfuly logged in!");
       onSuccess();
     }
   } catch (error) {
     console.log("error", error);
-    alert("Wrong username or password");
   }
 };
 
