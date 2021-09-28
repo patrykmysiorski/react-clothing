@@ -197,39 +197,34 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
               helperText={formik.touched.country && formik.errors.country}
             />
           </Grid>
-          {/*<Grid item xs={12}>*/}
-          {/*  <FormControlLabel*/}
-          {/*    control={*/}
-          {/*      <Checkbox color="secondary" name="saveAddress" value="yes" />*/}
-          {/*    }*/}
-          {/*    label="Use this address for payment details"*/}
-          {/*  />*/}
-          {/*</Grid>*/}
         </Grid>
-        <FormLabel component="legend">Delivery type</FormLabel>
-        <RadioGroup
-          aria-label="delivery"
-          name="delivery"
-          value={formik.values.delivery}
-          onChange={formik.handleChange}
-        >
-          <FormControlLabel control={<Radio />} label={"UPS"} value="UPS" />
-          <FormControlLabel control={<Radio />} label={"DHL"} value="DHL" />
-          <FormControlLabel
-            control={<Radio />}
-            label={"InPost"}
-            value="InPost"
-          />
-        </RadioGroup>
-
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth={true}
-        >
-          Submit
-        </Button>
+        <div className={"m-top-3"}>
+          <FormLabel component="legend">Delivery type</FormLabel>
+          <RadioGroup
+            aria-label="delivery"
+            name="delivery"
+            value={formik.values.delivery}
+            onChange={formik.handleChange}
+          >
+            <FormControlLabel control={<Radio />} label={"UPS"} value="UPS" />
+            <FormControlLabel control={<Radio />} label={"DHL"} value="DHL" />
+            <FormControlLabel
+              control={<Radio />}
+              label={"InPost"}
+              value="InPost"
+            />
+          </RadioGroup>
+        </div>
+        <div className={"m-top-3"}>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth={true}
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </>
   );
