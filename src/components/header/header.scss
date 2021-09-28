@@ -1,7 +1,10 @@
 @import "src/styles/colors";
 
-.header {
+.brzydki-pasek {
   background: rgba(239, 162, 40, 0.1);
+}
+
+.header {
   z-index: 1;
   height: 60px;
   display: grid;
