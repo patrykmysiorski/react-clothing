@@ -78,10 +78,10 @@ export const addCloth = ({
       author,
     })
     .then(function (docRef) {
-      alert("Cloth added");
+      // alert("Cloth added");
     })
     .catch(function (error) {
-      alert("Error adding Cloth");
+      // alert("Error adding Cloth");
     });
 };
 
