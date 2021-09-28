@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import {
   Button,
   CssBaseline,
@@ -16,6 +15,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAddress } from "../../redux/address/addressReducer";
+import { REGIONS } from "components/address-form/consts/regions";
+import { COUNTRIES } from "components/address-form/consts/countries";
 
 interface OwnProps {
   onSubmit: () => void;
@@ -35,24 +36,6 @@ export interface Address {
 }
 
 const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
-  const regions = [
-    "Dolnośląskie",
-    "Kujawsko-Pomorskie",
-    "Lubelskie",
-    "Lubuskie",
-    "Łódzkie",
-    "Małopolskie",
-    "Mazowieckie",
-    "Opolskie",
-    "Podkarpackie",
-    "Podlaskie",
-    "Pomorskie",
-    "Śląskie",
-    "Świętokrzyskie",
-    "Warmińsko-Mazurskie",
-    "Wielkopolskie",
-    "Zachodniopomorskie",
-  ];
   const AddressSchema = Yup.object().shape({
     firstName: Yup.string().required("Please, enter your name"),
     lastName: Yup.string().required("Please, enter your last name"),
@@ -155,19 +138,22 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Select
+            <TextField
+              fullWidth
+              required
               id="region"
               name="region"
-              labelId="State/Province/Region"
-              fullWidth
+              label="Region"
+              select
               value={formik.values.region}
               onChange={formik.handleChange}
               error={formik.touched.region && Boolean(formik.errors.region)}
+              helperText={formik.touched.region && formik.errors.region}
             >
-              {regions.map((region) => (
-                <MenuItem value={region}>{region}</MenuItem>
+              {REGIONS.map((country) => (
+                <MenuItem value={country}>{country}</MenuItem>
               ))}
-            </Select>
+            </TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -185,17 +171,21 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              fullWidth
               required
               id="country"
               name="country"
               label="Country"
-              fullWidth
-              autoComplete="shipping country"
+              select
               value={formik.values.country}
               onChange={formik.handleChange}
               error={formik.touched.country && Boolean(formik.errors.country)}
               helperText={formik.touched.country && formik.errors.country}
-            />
+            >
+              {COUNTRIES.map((country) => (
+                <MenuItem value={country}>{country}</MenuItem>
+              ))}
+            </TextField>
           </Grid>
         </Grid>
         <div className={"m-top-3"}>
@@ -206,11 +196,19 @@ const AddressForm: React.FC<OwnProps> = ({ onSubmit, initFormState }) => {
             value={formik.values.delivery}
             onChange={formik.handleChange}
           >
-            <FormControlLabel control={<Radio />} label={"UPS"} value="UPS" />
-            <FormControlLabel control={<Radio />} label={"DHL"} value="DHL" />
             <FormControlLabel
               control={<Radio />}
-              label={"InPost"}
+              label={"7$ - UPS "}
+              value="UPS"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label={"8$ - DHL"}
+              value="DHL"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label={"6$ - InPost"}
               value="InPost"
             />
           </RadioGroup>
