@@ -33,3 +33,23 @@ export const getOrders = async (uid) => {
       return orders;
     });
 };
+
+export const getOrder = async (uid, oid) => {
+  try {
+    const orderQuerySnapshot = await ordersRef
+    .where("uid", "==", uid)
+    .where("id", "==", oid)
+    .get();
+
+    return {
+      orderId: orderQuerySnapshot.id,
+      address: orderQuerySnapshot.get("address"),
+      products: orderQuerySnapshot.get("products"),
+      uid: orderQuerySnapshot.get("uid"),
+      date: orderQuerySnapshot.get("date"),
+    };
+  }
+  catch(e) {
+    console.error("Wtf2", e);
+  }
+}
