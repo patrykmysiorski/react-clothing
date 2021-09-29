@@ -7,6 +7,7 @@ import useCart from "hooks/useCart";
 import { useAuth } from "hooks/useAuth";
 import { removeClothStart } from "redux/shop/shopReducer";
 import { useDispatch } from "react-redux";
+import { useSnackbarSuccess } from "hooks/useSnackbarSuccess";
 
 interface Props {
   collection: Product[];
@@ -16,7 +17,7 @@ const Collection: FunctionComponent<Props> = ({ collection }) => {
   const dispatch = useAppDispatch();
   const dispatch2 = useDispatch();
   const { setIsCartOpen } = useCart();
-
+  const { enqueueSuccessSnackbar } = useSnackbarSuccess();
   const onAddToCart = (product: Product) => {
     dispatch(addToCart({ ...product, quantity: 1 }));
     setIsCartOpen(true);
@@ -44,6 +45,7 @@ const Collection: FunctionComponent<Props> = ({ collection }) => {
                   dispatch2(
                     removeClothStart({ userId: user.uid, clothId: product.id })
                   );
+                  enqueueSuccessSnackbar("Product removed :) ");
                 }}
               >
                 {"REMOVE?"}

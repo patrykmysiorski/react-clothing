@@ -13,3 +13,9 @@
 ## 1. npm install
 
 ## 2. npm start
+
+# Przykładowy użytkownik
+
+## login:zaliczeniowiec@gmail.com
+
+## hasło:Trudnehaslo1!

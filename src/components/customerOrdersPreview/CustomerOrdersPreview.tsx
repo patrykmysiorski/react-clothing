@@ -10,61 +10,63 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const columns: GridColDef[] = [
-  { 
-    field: 'id', 
-    headerName: 'ID', 
-    flex: 2, 
-    headerAlign: 'center', 
-    align: 'center',
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 2,
+    headerAlign: "center",
+    align: "center",
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'Full name of commissioning party',
+    field: "fullName",
+    headerName: "Full name",
+    description: "Full name of commissioning party",
     sortable: false,
     flex: 2,
-    headerAlign: 'center',
-    align: 'center',
+    headerAlign: "center",
+    align: "center",
     valueGetter: (params: GridValueGetterParams) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
+      `${params.getValue(params.id, "firstName") || ""} ${
+        params.getValue(params.id, "lastName") || ""
       }`,
   },
   {
-    field: 'totalPrice',
-    headerName: 'Total price',
-    type: 'string',
+    field: "totalPrice",
+    headerName: "Total price",
+    type: "string",
     flex: 2,
-    headerAlign: 'center',
-    align: 'center'
+    headerAlign: "center",
+    align: "center",
   },
   {
-    field: 'date',
-    headerName: 'Order Date',
-    type: 'string',
+    field: "date",
+    headerName: "Order Date",
+    type: "string",
     flex: 2,
-    headerAlign: 'center',
-    align: 'center',
+    headerAlign: "center",
+    align: "center",
     sortComparator: (v1, v2, cp1, cp2) => {
-      return Number((new Date(v1!.toString()).getTime()) > (new Date(v2!.toString()).getTime()));
-    }
+      return Number(
+        new Date(v1!.toString()).getTime() > new Date(v2!.toString()).getTime()
+      );
+    },
   },
   {
-    field: 'details',
+    field: "details",
     hideSortIcons: true,
     disableColumnMenu: true,
-    headerName: ' ',
-    description: 'Press button for order details',
+    headerName: " ",
+    description: "Press button for order details",
     flex: 1,
-    align: 'center',
+    align: "center",
     renderCell: (params: GridValueGetterParams) => {
-      const id = params.getValue(params.id, 'id')!.toString();
+      const id = params.getValue(params.id, "id")!.toString();
       return (
         <Link to={`/order/${id}`}>
           <Button variant="outlined">Details</Button>
         </Link>
-        )
-      },
+      );
+    },
   },
 ];
 
@@ -93,12 +95,12 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
     }).format(new Date(value.date)),
     totalPrice: `${sumTotalPrice(value.products)} PLN`,
     firstName: value.address.firstName,
-    lastName: value.address.lastName
+    lastName: value.address.lastName,
   }));
 
   return (
-    <>
-      <div style={{ height: 400, width: '60%', margin: '0 auto'}}>
+    <div className={"m-top-5"}>
+      <div style={{ height: 400, width: "60%", margin: "0 auto" }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -107,7 +109,7 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
           disableSelectionOnClick
         />
       </div>
-    </>
+    </div>
   );
 };
 
