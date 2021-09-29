@@ -6,6 +6,7 @@ export interface Product {
   currency: string;
   type: string;
   gender: string;
+  quantity: number;
   date: string;
   author: string;
 }

@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { Product } from "models/product";
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { useOrders } from "../../hooks/useOrders";
@@ -28,6 +29,14 @@ const columns: GridColDef[] = [
       `${params.getValue(params.id, 'firstName') || ''} ${
         params.getValue(params.id, 'lastName') || ''
       }`,
+  },
+  {
+    field: 'totalPrice',
+    headerName: 'Total price',
+    type: 'string',
+    flex: 2,
+    headerAlign: 'center',
+    align: 'center'
   },
   {
     field: 'date',
@@ -61,7 +70,16 @@ const columns: GridColDef[] = [
 
 const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
   const { orders } = useOrders();
-  console.log(orders);
+
+  const sumTotalPrice = (products: Product[]) => {
+    let totalSum = 0;
+    for (const product of products) {
+      totalSum += product.quantity * product.price;
+    }
+
+    return totalSum;
+  };
+
   const rows = orders.map((value) => ({
     id: value.orderId,
     rawDate: value.date,
@@ -73,6 +91,7 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
       minute: "2-digit",
       second: "2-digit",
     }).format(new Date(value.date)),
+    totalPrice: `${sumTotalPrice(value.products)} PLN`,
     firstName: value.address.firstName,
     lastName: value.address.lastName
   }));

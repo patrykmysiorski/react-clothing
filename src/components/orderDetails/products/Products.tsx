@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react";
 import { Product } from "models/product";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import Button from "components/button/Button";
-import { Link } from "react-router-dom";
 
 interface OwnProps {
   products: Product[] | undefined;
@@ -17,11 +15,18 @@ const columns: GridColDef[] = [
       align: 'center',
     },
     {
-      field: 'price',
-      headerName: 'Price',
-      flex: 1,
+      field: 'totalPrice',
+      headerName: 'Total price',
+      flex: 2,
       headerAlign: 'center',
       align: 'center',
+    },
+    {
+      field: 'quantity',
+      headerName: 'Quantity',
+      flex: 2,
+      headerAlign: 'center',
+      align: 'center'
     },
     {
       field: 'author',
@@ -37,7 +42,8 @@ const Products: FunctionComponent<OwnProps> = ({products}) => {
     const rows= products?.map((product) => ({
         id: product.id,
         name: product.name,
-        price: product.price,
+        totalPrice: `${product.price * product.quantity} PLN`,
+        quantity: product.quantity,
         author: product.author ?? "M&S&W"
     }));
 

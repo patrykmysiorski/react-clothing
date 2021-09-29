@@ -43,7 +43,7 @@ const OrderDetails: FunctionComponent = (props: any) => {
   const { orders } = useOrders();
   const [value, setValue] = React.useState(0);
 
-  const id = props.match.params.id
+  const id = props.match.params.id;
   const order = orders.find(o => o.orderId == id);
 
   const handleChange = (event: any, newValue: number) => {
@@ -64,9 +64,6 @@ const OrderDetails: FunctionComponent = (props: any) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
       </TabPanel>
     </Box>
     </>
