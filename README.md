@@ -7,3 +7,9 @@
 ## Backend: Framework Firebase,Firestore
 
 ## Frontend: Typescript&React
+
+# Jak uruchomic?
+
+## 1. npm install
+
+## 2. npm start

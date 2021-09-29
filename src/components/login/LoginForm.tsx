@@ -18,6 +18,7 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { signIn } from "../../firebase/auth";
 import { Link as RouterLink } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 interface OwnProps {
   onSubmitSuccess: () => void;
@@ -68,6 +69,8 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
       ),
   });
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -75,7 +78,9 @@ const LoginForm: FunctionComponent<Props> = ({ onSubmitSuccess }) => {
     },
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      signIn(values.email, values.password, onSubmitSuccess);
+      signIn(values.email, values.password, onSubmitSuccess, () => {
+        enqueueSnackbar("Wrong email or password", { variant: "error" });
+      });
     },
   });
 
