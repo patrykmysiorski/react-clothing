@@ -3,7 +3,6 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { useOrders } from "../../hooks/useOrders";
-import OrderPreview from "./orderPreview/OrderPreview";
 
 interface OwnProps {}
 
@@ -81,14 +80,14 @@ const CustomerOrdersPreview: FunctionComponent<Props> = (props) => {
   return (
     <>
       <div style={{ height: 400, width: '60%', margin: '0 auto'}}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        disableSelectionOnClick
-      />
-    </div>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          disableSelectionOnClick
+        />
+      </div>
     </>
   );
 };
