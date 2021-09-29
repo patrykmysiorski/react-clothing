@@ -4,7 +4,6 @@ import firebase from "firebase/compat";
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-
   const logout = () => {
     return firebase
       .auth()
@@ -14,14 +13,14 @@ export const AuthProvider = ({ children }) => {
       });
   };
   /*
-      const resetEmail= (email) => {
-        return firebase
-          .auth()
-          .sendPasswordResetEmail(email)
-          .then(() => {
-            setUser(null);
-          });
-      };*/
+            const resetEmail= (email) => {
+              return firebase
+                .auth()
+                .sendPasswordResetEmail(email)
+                .then(() => {
+                  setUser(null);
+                });
+            };*/
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {

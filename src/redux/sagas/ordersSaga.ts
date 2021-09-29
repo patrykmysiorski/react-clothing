@@ -10,6 +10,7 @@ import {
   postOrderSuccess,
 } from "../orders/ordersReducer";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { removeAllFromCart } from "redux/cart/cartReducer";
 
 function* fetchOrders({ payload: uid }: PayloadAction<string>) {
   try {
@@ -26,6 +27,7 @@ function* laPostOrder({ payload }: PayloadAction<Order>) {
   try {
     yield postOrder(payload);
     yield put(postOrderSuccess());
+    yield put(removeAllFromCart());
   } catch {
     yield put(postOrderFailed());
   }

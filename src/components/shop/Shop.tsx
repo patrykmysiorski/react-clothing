@@ -214,8 +214,8 @@ interface PageLimiterProps {
 }
 
 const PageLimiter = ({ onAll, onMore }: PageLimiterProps) => (
-  <Button onClick={onMore} fullWidth={true}>
-    Show more clothes{" "}
+  <Button variant="contained" color="primary" onClick={onMore} fullWidth={true}>
+    Show more clothes
   </Button>
 );
 

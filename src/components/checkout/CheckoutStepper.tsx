@@ -51,7 +51,6 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
         return (
           <CheckoutThirdStep
             onFinish={() => {
-              console.log("WTF");
               dispatch(
                 asyncPostOrderStart({
                   uid: user.uid,
@@ -60,6 +59,8 @@ const CheckoutStepper: FunctionComponent<Props> = (props) => {
                   date: new Date().toISOString(),
                 })
               );
+              //fckasync
+              push("/orders");
             }}
           />
         );
