@@ -23,6 +23,7 @@ import TextField from "@material-ui/core/TextField";
 import { ClothType } from "../../constants/clothType";
 import { asyncFetchOrdersStart } from "../../redux/orders/ordersReducer";
 import { useAuth } from "../../hooks/useAuth";
+import { useSnackbarSuccess } from "hooks/useSnackbarSuccess";
 
 export interface ClothesFetchParams {
   type: string;
@@ -56,6 +57,18 @@ const Shop: FunctionComponent = () => {
   };
   // @ts-ignore
   const { user } = useAuth();
+  const { enqueueSuccessSnackbar } = useSnackbarSuccess();
+
+  useEffect(() => {
+    if (user) {
+      enqueueSuccessSnackbar(
+        `Hi ${user.email.substring(
+          0,
+          user.email.indexOf("@")
+        )}! Remember you can add products when you're logged in`
+      );
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(asyncFetchOrdersStart(user?.uid));
@@ -87,22 +100,26 @@ const Shop: FunctionComponent = () => {
             />
             <FilterInput setFilter={setFilter} defaultValue={filter} />
           </div>
-          <div className={"new"}>
-            <NewProductModal onAdd={getClothes} />
+          {user && (
+            <div className={"new"}>
+              <NewProductModal onAdd={getClothes} />
+            </div>
+          )}
+          <div className={"m-top-3"}>
+            <Collection
+              collection={
+                filter === ""
+                  ? collection
+                  : collection.filter((cloth) =>
+                      cloth.name
+                        .toLocaleLowerCase()
+                        .includes(filter.toLocaleLowerCase())
+                    )
+              }
+            />
           </div>
-          <Collection
-            collection={
-              filter === ""
-                ? collection
-                : collection.filter((cloth) =>
-                    cloth.name
-                      .toLocaleLowerCase()
-                      .includes(filter.toLocaleLowerCase())
-                  )
-            }
-          />
           <Grid container>
-            <Grid item xs={10}>
+            <Grid item xs={12}>
               <PageLimiter
                 onAll={() => {
                   showAll();

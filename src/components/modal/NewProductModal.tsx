@@ -17,16 +17,19 @@ const NewProductModal: FunctionComponent<Props> = (props) => {
           setOpened(true);
         }}
         style={{
-          backgroundColor: "#f3ac40",
+          backgroundColor: "#d51a45",
           color: "#FFFFFF",
           padding: "10px",
+          width: 300,
+          height: 50,
+          borderRadius: 50,
         }}
       >
         Add new ciuch
       </Button>
       <Modal open={isOpened} onClose={() => setOpened(false)}>
         <Card>
-          <NewProductForm onAdd={props.onAdd} />
+          <NewProductForm onAdd={props.onAdd} setOpened={setOpened} />
         </Card>
       </Modal>
     </>

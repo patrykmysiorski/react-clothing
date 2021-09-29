@@ -9,6 +9,11 @@ interface ShopState {
   isFailed: boolean;
 }
 
+export interface ClothRemovePayload {
+  userId: string;
+  clothId: number;
+}
+
 const initialState: ShopState = {
   collections: {},
   isFetching: false,
@@ -43,6 +48,16 @@ export const shopSlice = createSlice({
       state.isFetching = false;
       state.isFailed = true;
     },
+    removeClothSuccess: (state) => {
+      state.isFetching = false;
+    },
+    removeClothStart: (state, action: PayloadAction<ClothRemovePayload>) => {
+      state.isFetching = true;
+    },
+    removeClothFailed: (state) => {
+      state.isFetching = false;
+      state.isFailed = true;
+    },
   },
 });
 
@@ -53,6 +68,9 @@ export const {
   postClothFailed,
   asyncPostClothStart,
   postClothSuccess,
+  removeClothSuccess,
+  removeClothStart,
+  removeClothFailed,
 } = shopSlice.actions;
 
 export const selectShop = (state: RootState) => state.shop;

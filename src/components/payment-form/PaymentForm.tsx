@@ -7,6 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "@material-ui/core";
+import { useSnackbarSuccess } from "hooks/useSnackbarSuccess";
 
 interface OwnProps {
   onSuccessfulPayment: () => void;
@@ -30,6 +31,7 @@ const PaymentForm: React.FC<OwnProps> = ({ onSuccessfulPayment }) => {
       .min(3, "Enter 3 figures")
       .max(4, "CVV has 3 figures"),
   });
+  const { enqueueSuccessSnackbar } = useSnackbarSuccess();
 
   const formik = useFormik({
     initialValues: {
@@ -41,8 +43,10 @@ const PaymentForm: React.FC<OwnProps> = ({ onSuccessfulPayment }) => {
     validationSchema: paymentSchema,
     onSubmit: (values) => {
       onSuccessfulPayment();
+      enqueueSuccessSnackbar("Payment completed! Proceeding to order");
     },
   });
+
   return (
     <>
       <Typography variant="h6" gutterBottom>

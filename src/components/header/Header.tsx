@@ -18,7 +18,13 @@ const Header: FunctionComponent = () => {
   // @ts-ignore
   const { user } = useAuth();
   return (
-    <div className={classNames("header", { "black-font": !isMainPage })}>
+    <div
+      className={classNames(
+        "header",
+        { "black-font": !isMainPage },
+        { "brzydki-pasek": !isMainPage }
+      )}
+    >
       <span
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="menu-element material-icons"

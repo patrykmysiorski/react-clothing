@@ -20,6 +20,7 @@ import SignupForm from "./components/signup/SignupForm";
 import { useAuth } from "./hooks/useAuth";
 import CustomerOrdersPreview from "./components/customerOrdersPreview/CustomerOrdersPreview";
 import OrderDetails from "components/orderDetails/OrderDetails";
+import { SnackbarProvider } from "notistack";
 
 const theme = createTheme({
   palette: {
@@ -65,81 +66,83 @@ const App = () => {
 
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="app">
-        <MenuContext.Provider
-          value={{
-            isMenuOpen,
-            setIsMenuOpen,
-          }}
-        >
-          <CartContext.Provider
+      <SnackbarProvider maxSnack={3}>
+        <div className="app">
+          <MenuContext.Provider
             value={{
-              isCartOpen,
-              setIsCartOpen,
+              isMenuOpen,
+              setIsMenuOpen,
             }}
           >
-            <Sidebar />
-            <Cart />
-            <div
-              onClick={hideSidebars}
-              className={`main-content ${
-                isMenuOpen ? "sidebar-menu-open" : ""
-              } ${isCartOpen ? "cart-open" : ""}`}
+            <CartContext.Provider
+              value={{
+                isCartOpen,
+                setIsCartOpen,
+              }}
             >
-              <Header />
-              <Switch>
-                <Route path="/shop">
-                  <Shop />
-                </Route>
-                <Route path="/brand">
-                  <Brand />
-                </Route>
-                <Route path="/contact">
-                  <Contact />
-                </Route>
-                <Route path="/help">
-                  <Help />
-                </Route>
-                <PrivateRoute exact path={"/orders"}>
-                  <CustomerOrdersPreview />
-                </PrivateRoute>
-                <PrivateRoute exact path={"/order/:id"} component={OrderDetails}>
+              <Sidebar />
+              <Cart />
+              <div
+                onClick={hideSidebars}
+                className={`main-content ${
+                  isMenuOpen ? "sidebar-menu-open" : ""
+                } ${isCartOpen ? "cart-open" : ""}`}
+              >
+                <Header />
+                <Switch>
+                  <Route path="/shop">
+                    <Shop />
+                  </Route>
+                  <Route path="/brand">
+                    <Brand />
+                  </Route>
+                  <Route path="/contact">
+                    <Contact />
+                  </Route>
+                  <Route path="/help">
+                    <Help />
+                  </Route>
+                  <PrivateRoute exact path={"/orders"}>
+                    <CustomerOrdersPreview />
+                  </PrivateRoute>
+                  <PrivateRoute exact path={"/order/:id"} component={OrderDetails}>
                   <></>
                 </PrivateRoute>
-                {/*<PrivateRoute exact path="/">*/}
-                {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
-                {/*</PrivateRoute>*/}
-                <Route path="/checkout">
-                  <CheckoutStepperContext.Provider
-                    value={{
-                      setActiveStep,
-                      activeStep,
-                      goToNextStep,
-                      completed,
-                      setCompleted,
-                    }}
-                  >
-                    <Checkout />
-                  </CheckoutStepperContext.Provider>
-                </Route>
-                <Route path="/login">
-                  <LoginForm
-                    onSubmitSuccess={() => {
-                      push("/shop");
-                    }}
-                  />
-                </Route>
-                <Route path="/signup">
-                  <SignupForm />
-                </Route>
-                <Route path="/">
-                  <MainPage />
-                </Route>
-              </Switch>
-            </div>
-          </CartContext.Provider>
-        </MenuContext.Provider>
-      </div>
+                  {/*<PrivateRoute exact path="/">*/}
+                  {/*  <LoginForm onSubmitSuccess={() => {}} />*/}
+                  {/*</PrivateRoute>*/}
+                  <Route path="/checkout">
+                    <CheckoutStepperContext.Provider
+                      value={{
+                        setActiveStep,
+                        activeStep,
+                        goToNextStep,
+                        completed,
+                        setCompleted,
+                      }}
+                    >
+                      <Checkout />
+                    </CheckoutStepperContext.Provider>
+                  </Route>
+                  <Route path="/login">
+                    <LoginForm
+                      onSubmitSuccess={() => {
+                        push("/shop");
+                      }}
+                    />
+                  </Route>
+                  <Route path="/signup">
+                    <SignupForm />
+                  </Route>
+                  <Route path="/">
+                    <MainPage />
+                  </Route>
+                </Switch>
+              </div>
+            </CartContext.Provider>
+          </MenuContext.Provider>
+        </div>
+      </SnackbarProvider>
     </MuiThemeProvider>
   );
 };

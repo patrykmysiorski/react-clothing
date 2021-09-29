@@ -1,6 +1,11 @@
 @import "src/styles/colors";
 
+.brzydki-pasek {
+  background: rgba(239, 162, 40, 0.1);
+}
+
 .header {
+  z-index: 1;
   height: 60px;
   display: grid;
   width: 100%;
@@ -39,6 +44,7 @@
 
   .cart-icon {
     margin: 0 auto;
+
     .border {
       width: 30px;
       line-height: 30px;
